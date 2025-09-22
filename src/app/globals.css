@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Font Declarations
+ * 
+ * Dalek Pinpoint - A typeface with Greek, Phoenician and Runic alphabet overtones
+ * Perfect for the ancient Greek manuscript aesthetic of this portfolio.
+ * Based on 1960s Dalek comic book lettering, provides authentic ancient-modern fusion.
+ */
+@font-face {
+  font-family: 'Dalek Pinpoint';
+  src: url('/fonts/DalekPinpointBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap; /* Optimize loading performance */
+}
+
 /* Design System Variables
  * 
  * Built on 8px base unit for consistent spacing rhythm across the entire application.
@@ -20,6 +34,15 @@
   --color-background: #eee4e3; /* Warm marble white - evokes ancient parchment */
   --color-accent: #131313; /* Charcoal black - primary text, ensures WCAG AA compliance */
   --color-foreground: #5d5953; /* Accessible muted brown - secondary text, WCAG AA compliant (5.58:1 contrast) */
+
+  /* Font Family System
+   * 
+   * Ancient scroll aesthetic fonts with proper fallbacks
+   * Dalek Pinpoint provides authentic Greek/Runic character for headings
+   * System fonts maintained for optimal body text readability
+   */
+  --font-family-ancient: 'Dalek Pinpoint', 'Times New Roman', 'Georgia', serif;
+  --font-family-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
 
   /* Fluid Typography Scale
    * 
@@ -76,16 +99,7 @@ html {
 }
 
 body {
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    'Roboto',
-    'Oxygen',
-    'Ubuntu',
-    'Cantarell',
-    sans-serif;
+  font-family: var(--font-family-body);
   font-size: var(--font-size-body);
   line-height: 1.6;
   color: var(--color-foreground);
@@ -93,22 +107,26 @@ body {
   overflow-x: hidden;
 }
 
-/* Typography */
+/* Typography - Ancient Manuscript Aesthetic */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
+  font-family: var(--font-family-ancient);
   color: var(--color-accent);
-  font-weight: 600;
+  font-weight: 700; /* Always bold for Dalek Pinpoint */
   line-height: 1.2;
   margin-bottom: var(--space-2);
+  letter-spacing: 0.02em; /* Subtle spacing for ancient character */
+  text-shadow: 1px 1px 2px rgba(139, 119, 85, 0.1); /* Subtle embossed effect */
 }
 
 h1 {
   font-size: var(--font-size-hero);
   font-weight: 700;
+  letter-spacing: 0.01em; /* Tighter for hero text */
 }
 
 h2 {
@@ -161,6 +179,18 @@ a:focus {
 
 .text-background {
   color: var(--color-background);
+}
+
+/* Ancient Font Utility Classes */
+.font-ancient {
+  font-family: var(--font-family-ancient);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: 1px 1px 2px rgba(139, 119, 85, 0.1);
+}
+
+.font-body {
+  font-family: var(--font-family-body);
 }
 
 /* Focus styles for accessibility */
@@ -828,12 +858,14 @@ html {
 }
 
 .project-scroll-card__title {
+  font-family: var(--font-family-ancient);
   font-size: clamp(1.4rem, 3.5vw, 1.8rem);
   font-weight: 700;
   color: var(--color-accent);
   text-align: center;
   flex: none;
   margin: 0;
+  letter-spacing: 0.02em;
   text-shadow: 1px 1px 2px rgba(139, 119, 85, 0.1);
 }
 
@@ -1074,12 +1106,14 @@ html {
 }
 
 .publication-scroll-card__title {
+  font-family: var(--font-family-ancient);
   font-size: clamp(1.3rem, 3.2vw, 1.6rem);
   font-weight: 700;
   color: var(--color-accent);
   line-height: 1.3;
   margin: 0;
-  font-family: 'Times New Roman', serif;
+  letter-spacing: 0.02em;
+  text-shadow: 1px 1px 2px rgba(139, 119, 85, 0.1);
 }
 
 /* Publication content sections */
