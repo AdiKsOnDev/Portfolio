@@ -10,7 +10,7 @@
  */
 @font-face {
   font-family: 'Dalek Pinpoint';
-  src: url('/fonts/DalekPinpointBold.ttf') format('truetype');
+  src: url('/Portfolio/fonts/DalekPinpointBold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap; /* Optimize loading performance */
