@@ -117,7 +117,7 @@ export function ProjectScrollCard({
             aria-label={`View ${project.title} project details`}
           >
             <span className="project-scroll-card__action-icon" aria-hidden="true">
-              🏛️
+              
             </span>
             <span className="project-scroll-card__action-text">View Project</span>
             <svg
@@ -141,7 +141,7 @@ export function ProjectScrollCard({
             aria-label={`View ${project.title} source code`}
           >
             <span className="project-scroll-card__action-icon" aria-hidden="true">
-              📜
+              
             </span>
             <span className="project-scroll-card__action-text">Source Code</span>
           </button>
