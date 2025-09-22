@@ -7,7 +7,7 @@ import { ParallaxBackground } from '@/components/ParallaxBackground'
 
 export default function HomePage() {
   return (
-    <>
+    <div className="relative min-h-screen">
       {/* Greek Letters Parallax Background - positioned behind all content */}
       <ParallaxBackground />
 
@@ -20,13 +20,13 @@ export default function HomePage() {
       </a>
 
       {/* Main page structure with semantic HTML5 and ARIA landmarks */}
-      <main id="main-content" aria-label="Portfolio content">
+      <main id="main-content" aria-label="Portfolio content" className="relative z-10">
         <HeroSection />
         <AboutSection />
         <WorkSection />
         <PublicationsSection />
         <ContactSection />
       </main>
-    </>
+    </div>
   )
 }

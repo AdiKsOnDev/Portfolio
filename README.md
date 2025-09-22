@@ -11,6 +11,9 @@ A modern, minimalist portfolio website built with Next.js, featuring clean typog
 - **Accessibility Focused**: WCAG compliant implementation with semantic HTML and proper ARIA attributes
 - **Performance Optimized**: Minimal bundle size with efficient hydration patterns
 - **Modern Architecture**: Component-based structure with clean separation of concerns
+- **Greek Letters Parallax**: Stunning three-layer parallax background with floating Greek letters
+- **Enhanced Content Sections**: Professional layout with glass morphism effects and fluid typography
+- **Interactive Forms**: Contact form with validation and social media integration
 
 ## Design System
 
@@ -33,6 +36,13 @@ The color scheme draws inspiration from ancient Greek marble and parchment:
 - **Base Unit**: 8px grid system for consistent rhythm
 - **Custom Utilities**: Extended spacing scale (18, 22) for precise layouts
 - **Responsive**: Adaptive spacing that scales with viewport size
+
+### Enhanced Visual Effects (Iteration 4)
+
+- **Glass Morphism**: Subtle backdrop-blur effects for depth and modern aesthetics
+- **Parallax Background**: Three-layer Greek letter system with GPU-accelerated animations
+- **Fluid Typography**: Advanced clamp() functions for seamless cross-device scaling
+- **Interactive Hover States**: Transform effects and visual feedback for enhanced UX
 
 ## Quick Start
 
@@ -66,13 +76,14 @@ src/
 ├── app/
 │   ├── layout.tsx          # Root layout with metadata and font configuration
 │   ├── page.tsx           # Main page composition
-│   └── globals.css        # Global styles and design system variables
+│   └── globals.css        # Global styles, design system variables, and enhanced effects
 └── components/
-    ├── HeroSection.tsx    # Landing section with scroll indicator
-    ├── AboutSection.tsx   # Personal information and skills
-    ├── WorkSection.tsx    # Project portfolio grid
-    ├── PublicationsSection.tsx  # Academic publications display
-    └── ContactSection.tsx # Contact form and social links
+    ├── HeroSection.tsx        # Landing section with scroll indicator
+    ├── ParallaxBackground.tsx # Greek letters parallax system with three-layer animation
+    ├── AboutSection.tsx       # Enhanced personal info with two-column layout and skills
+    ├── WorkSection.tsx        # Project portfolio with interactive cards and hover effects
+    ├── PublicationsSection.tsx # Academic publications with citation formatting
+    └── ContactSection.tsx     # Contact form with glass morphism and social links
 ```
 
 ### Development Guidelines
@@ -82,6 +93,48 @@ src/
 3. **Accessibility**: Ensure proper semantic HTML, ARIA labels, and keyboard navigation
 4. **Performance**: Implement proper hydration patterns and optimize bundle size
 5. **Type Safety**: Maintain strict TypeScript compliance with proper interface definitions
+
+## Iteration 4 Enhancements
+
+The latest iteration introduces significant content section improvements:
+
+### Enhanced Components
+
+#### AboutSection
+
+- **Two-column responsive layout** with proper mobile stacking
+- **Skills categorization** into Frontend, Backend, and Specializations
+- **Professional bio content** with improved typography hierarchy
+- **Inspirational quote section** with subtle visual separation
+
+#### WorkSection
+
+- **Interactive project cards** with sophisticated hover effects
+- **Project numbering system** for better visual organization
+- **Technology tags** with enhanced styling and hover states
+- **Action buttons** with icons for "View Project" and "Source Code"
+
+#### PublicationsSection
+
+- **Academic citation formatting** following standard publication styles
+- **Impact metrics display** with realistic citation counts and journal rankings
+- **Enhanced readability** with proper typography scaling
+- **Action links** for PDF downloads and research data access
+
+#### ContactSection
+
+- **Glass morphism form design** with backdrop blur effects
+- **Two-column form layout** for name/email fields
+- **Enhanced social links** with icon containers and hover animations
+- **Professional messaging** about response times and contact purposes
+
+### Technical Improvements
+
+- **SSR-safe implementation** with proper window object guards
+- **Enhanced glass morphism effects** using backdrop-filter for depth
+- **Fluid typography system** with advanced clamp() functions
+- **Improved accessibility** with comprehensive ARIA labels and semantic structure
+- **Performance optimized** hover effects and animations
 
 ## Technical Requirements
 
