@@ -1,0 +1,457 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design System Variables
+ * 
+ * Built on 8px base unit for consistent spacing rhythm across the entire application.
+ * Typography uses clamp() functions for fluid responsive scaling without breakpoints.
+ * Color palette designed for accessibility with minimum 4.5:1 contrast ratios.
+ * 
+ * Greek-inspired minimalist aesthetic prioritizes readability and visual hierarchy
+ * while maintaining modern web standards and performance optimization.
+ */
+:root {
+  /* Core Color Scheme - Minimalist Greek-Inspired Palette
+   * 
+   * Palette evokes ancient Greek marble, parchment, and architectural elements
+   * while ensuring modern accessibility standards and visual comfort.
+   */
+  --color-background: #eee4e3; /* Warm marble white - evokes ancient parchment */
+  --color-accent: #131313; /* Charcoal black - primary text, ensures WCAG AA compliance */
+  --color-foreground: #5d5953; /* Accessible muted brown - secondary text, WCAG AA compliant (5.58:1 contrast) */
+
+  /* Fluid Typography Scale
+   * 
+   * Responsive typography that scales smoothly between mobile and desktop
+   * without requiring media queries. Uses viewport units for natural scaling.
+   * Values chosen for optimal readability and visual impact across devices.
+   */
+  --font-size-hero: clamp(3rem, 8vw, 5rem); /* Hero text: 48px → 80px */
+  --font-size-heading: clamp(2rem, 5vw, 3rem); /* Headings: 32px → 48px */
+  --font-size-body: clamp(1rem, 2.5vw, 1.125rem); /* Body text: 16px → 18px */
+  --font-size-small: 0.875rem; /* Small text: 14px fixed */
+
+  /* Spacing System (8px Base Unit)
+   * 
+   * Consistent vertical rhythm based on 8px grid system.
+   * Provides mathematical harmony and visual consistency.
+   * All spacing values are multiples of 8px for pixel-perfect alignment.
+   */
+  --space-1: 0.5rem; /* 8px */
+  --space-2: 1rem; /* 16px */
+  --space-3: 1.5rem; /* 24px */
+  --space-4: 2rem; /* 32px */
+  --space-5: 2.5rem; /* 40px */
+  --space-6: 3rem; /* 48px */
+  --space-8: 4rem; /* 64px */
+  --space-10: 5rem; /* 80px */
+  --space-12: 6rem; /* 96px */
+  --space-15: 7.5rem; /* 120px */
+  --space-20: 10rem; /* 160px */
+
+  /* Layout */
+  --content-max-width: 62.5rem; /* 1000px */
+  --content-narrow-width: 50rem; /* 800px */
+
+  /* Transitions */
+  --transition-fast: 0.15s ease-out;
+  --transition-normal: 0.3s ease-out;
+  --transition-slow: 0.5s ease-out;
+}
+
+/* CSS Reset and Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    sans-serif;
+  font-size: var(--font-size-body);
+  line-height: 1.6;
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-accent);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: var(--space-2);
+}
+
+h1 {
+  font-size: var(--font-size-hero);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: var(--font-size-heading);
+}
+
+p {
+  margin-bottom: var(--space-3);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+a:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Utility Classes */
+.container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.container-narrow {
+  max-width: var(--content-narrow-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.section {
+  padding: var(--space-15) 0;
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-foreground {
+  color: var(--color-foreground);
+}
+
+.text-background {
+  color: var(--color-background);
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Smooth animations */
+* {
+  transition:
+    transform var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+/* Layout System - CSS Grid/Flexbox Implementation */
+
+/* Page-level layout container */
+.page-sections {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Section spacing system with proper viewport handling */
+.section {
+  padding: var(--space-15) 0; /* 120px top/bottom */
+  position: relative;
+  width: 100%;
+}
+
+/* Enhanced container system with proper max-width constraints */
+.container {
+  max-width: var(--content-max-width); /* 1000px */
+  margin: 0 auto;
+  padding: 0 var(--space-4); /* 32px left/right */
+  width: 100%;
+}
+
+.container-narrow {
+  max-width: var(--content-narrow-width); /* 800px */
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+  width: 100%;
+}
+
+/* Screen reader only utility for accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Hero Section Specific Styles */
+.hero-section {
+  height: 100vh; /* Full viewport height */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  /* Mobile viewport height fix */
+  height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  min-height: 100dvh;
+}
+
+/* Hero content animations and layout */
+.hero-content {
+  text-align: center;
+  z-index: 10;
+  position: relative;
+  animation: heroFadeInUp 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Staggered animations for hero elements */
+.hero-title {
+  animation-delay: 0.2s;
+}
+
+.hero-subtitle {
+  animation-delay: 0.4s;
+}
+
+/* Smooth scroll indicator with continuous animation */
+.scroll-indicator {
+  position: absolute;
+  bottom: var(--space-8); /* 64px from bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  animation: scrollBounce 2s ease-in-out infinite;
+  cursor: pointer;
+}
+
+.scroll-indicator-container {
+  width: 24px;
+  height: 40px;
+  border: 2px solid var(--color-accent);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 8px;
+  transition: opacity var(--transition-fast);
+}
+
+.scroll-indicator-container:hover {
+  opacity: 0.7;
+}
+
+.scroll-indicator-dot {
+  width: 4px;
+  height: 12px;
+  background-color: var(--color-accent);
+  border-radius: 2px;
+  animation: scrollDot 2s ease-in-out infinite;
+}
+
+/* Keyframe Animations */
+@keyframes heroFadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollBounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+@keyframes scrollDot {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(16px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Enhanced smooth scrolling with performance optimization */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-padding-top: var(--space-8); /* Offset for fixed headers */
+}
+
+/* Section transition effects */
+.section {
+  scroll-margin-top: var(--space-8);
+}
+
+/* Mobile responsive enhancements */
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-10) 0; /* Reduce padding on mobile */
+  }
+
+  .container,
+  .container-narrow {
+    padding: 0 var(--space-3); /* Smaller side padding on mobile */
+  }
+
+  .hero-section {
+    /* Additional mobile viewport height handling */
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .scroll-indicator {
+    bottom: var(--space-6); /* Closer to bottom on mobile */
+  }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1200px) {
+  .container {
+    padding: 0 var(--space-6); /* More breathing room on large screens */
+  }
+}
+
+/* Parallax Background Styles */
+.parallax-background {
+  /* Ensure background stays behind all content */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.greek-letter {
+  /* Optimize for GPU acceleration */
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+
+  /* Ensure letters don't interfere with content */
+  user-select: none;
+  pointer-events: none;
+
+  /* Smooth animations for better visual quality */
+  transition: transform 0.1s ease-out;
+}
+
+/* Performance optimizations for parallax elements */
+@media (min-width: 768px) {
+  .parallax-background {
+    /* Enable hardware acceleration on larger screens */
+    transform: translateZ(0);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-content {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .scroll-indicator,
+  .scroll-indicator-dot {
+    animation: none;
+  }
+
+  /* Hide parallax background for reduced motion */
+  .parallax-background {
+    display: none;
+  }
+
+  .greek-letter {
+    transition: none !important;
+    animation: none !important;
+  }
+}
