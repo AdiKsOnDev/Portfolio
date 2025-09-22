@@ -270,60 +270,73 @@ Build out the About, Work/Projects, Publications, and Contact sections with prop
 
 ---
 
-## Iteration 5: Card Components & Animations
+## Iteration 5: Ancient Scroll Card Components & Animations
 
 ### Goal
 
-Create reusable card components with scroll-triggered animations and hover effects.
+Transform card components into authentic ancient scroll designs with thematic animations that match the Greek-inspired portfolio theme.
 
 ### Dependencies
 
 - Iteration 4 completed (content sections)
+- Greek parallax system working (Iteration 2)
 
 ### Deliverables
 
-1. **Card Component System**
-   - Reusable card structure
-   - Project card variant
-   - Publication card variant
-   - Consistent styling
+1. **Ancient Scroll Component System**
+   - Base ScrollCard with papyrus texture
+   - Project scroll variant with wax seals
+   - Publication manuscript variant
+   - Greek ornamental borders and patterns
+   - Scroll end caps with decorative designs
 
-2. **Scroll Animations**
-   - Fade + slide up entrance
-   - Staggered animations for multiple cards
-   - Intersection Observer implementation
+2. **Thematic Scroll Animations**
+   - Unroll effect for entrance animations
+   - Parchment flutter and edge movement
+   - Ink fade-in as if being inscribed
+   - Seal-breaking hover interactions
+   - Staggered unrolling for multiple scrolls
 
-3. **Interactive Effects**
-   - Hover states with accent color
-   - Smooth transitions
-   - Click interactions
+3. **Interactive Scroll Effects**
+   - 3D rotation suggesting parchment lift
+   - Wax seal glow on hover
+   - Text highlighting with gold accents
+   - Progressive content revelation
+   - Smooth state transitions
 
 ### Tasks
 
-- [ ] Create base card component structure
-- [ ] Implement project card variant
-- [ ] Implement publication card variant
-- [ ] Add subtle border styling
-- [ ] Create hover effect with accent color
-- [ ] Implement Intersection Observer for scroll triggers
-- [ ] Add fade + slide up animations
-- [ ] Implement staggered animation delays
-- [ ] Add smooth transition effects
-- [ ] Test animation performance
-- [ ] Ensure animations respect prefers-reduced-motion
+- [ ] Create base ScrollCard component with papyrus texture system
+- [ ] Design and implement scroll end cap SVGs
+- [ ] Build Greek ornamental border patterns (meander, wave, laurel)
+- [ ] Implement ProjectScroll variant with technology parchment tags
+- [ ] Create PublicationScroll with manuscript styling
+- [ ] Develop wax/clay seal interactive components
+- [ ] Implement unroll entrance animation sequence
+- [ ] Set up Intersection Observer for viewport triggers
+- [ ] Add staggered animation delays for scroll collections
+- [ ] Create hover effect system (lift, flutter, glow)
+- [ ] Build seal-breaking interaction animation
+- [ ] Integrate with WorkSection and PublicationsSection
+- [ ] Optimize texture rendering and animation performance
+- [ ] Test accessibility features and reduced motion support
+- [ ] Document animation configurations and usage
 
 ### Success Metrics
 
-- Cards animate smoothly on scroll
-- Hover effects feel responsive
-- Staggered animations create visual rhythm
-- No performance issues with multiple cards
-- Animations can be disabled for accessibility
+- Scrolls authentically evoke ancient Greek manuscripts
+- Animations feel smooth and thematically appropriate
+- All original card functionality maintained
+- No performance degradation with multiple scrolls
+- Full accessibility compliance achieved
+- Seamless integration with existing Greek theme
 
 ### Risk Factors
 
-- **Risk**: Too many animations causing distraction
-- **Mitigation**: Keep animations subtle, provide user controls, test with users
+- **Risk**: Over-stylization obscuring content readability
+- **Mitigation**: Maintain high contrast, provide simpler view option, test with real content
+- **Risk**: Animation performance issues with complex textures
+- **Mitigation**: Use CSS transforms, implement queuing, monitor frame rates
 
 ---
 
