@@ -42,7 +42,9 @@
    * System fonts maintained for optimal body text readability
    */
   --font-family-ancient: 'Dalek Pinpoint', 'Times New Roman', 'Georgia', serif;
-  --font-family-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  --font-family-body:
+    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', sans-serif;
 
   /* Fluid Typography Scale
    * 
@@ -307,6 +309,13 @@ select:focus {
   z-index: 20;
   animation: scrollBounce 2s ease-in-out infinite;
   cursor: pointer;
+  /* Enhanced touch target with padding around the visual element */
+  padding: 10px; /* Adds 20px to overall touch area */
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .scroll-indicator-container {
@@ -385,25 +394,167 @@ html {
   scroll-margin-top: var(--space-8);
 }
 
-/* Mobile responsive enhancements */
-@media (max-width: 768px) {
+/* ========================================
+   RESPONSIVE DESIGN SYSTEM
+   ======================================== */
+
+/* BREAKPOINT SELECTION RATIONALE:
+ * 
+ * Our responsive breakpoints are strategically chosen based on device usage patterns,
+ * content requirements, and accessibility considerations for optimal user experience.
+ * 
+ * 479px: Small mobile devices (iPhone SE, older Android phones)
+ *        - Single-column layouts mandatory for readability
+ *        - Reduced spacing and simplified interactions
+ *        - Typography scales down to maintain legibility
+ *        - Essential touch targets enlarged for accessibility
+ *        - Parallax effects disabled for performance
+ * 
+ * 767px: Mobile to tablet transition threshold
+ *        - Transition from pure mobile to hybrid layouts
+ *        - Two-column layouts become viable for content
+ *        - Touch interactions remain primary but hover states introduced
+ *        - Typography intermediate scaling for tablet readability
+ *        - Reduced parallax complexity for battery life
+ * 
+ * 1023px: Tablet landscape and small desktop boundary
+ *        - Desktop-class interactions and layouts available
+ *        - Multi-column layouts and complex grid systems enabled
+ *        - Full parallax effects and animations perform well
+ *        - Hover states become primary interaction method
+ *        - Enhanced spacing and visual hierarchy implemented
+ * 
+ * 1199px: Large screen optimization threshold
+ *        - Maximum content width constraints applied (1000px/800px containers)
+ *        - Enhanced spacing for visual comfort on large displays
+ *        - Premium interaction patterns and micro-animations enabled
+ *        - Optimal reading line lengths maintained (65-75 characters)
+ *        - Full desktop feature set including complex hover effects
+ * 
+ * These breakpoints ensure smooth progression from mobile-first base styles
+ * to progressively enhanced desktop experiences while maintaining the ancient
+ * Greek manuscript aesthetic across all device categories.
+ */
+
+/* Mobile First Approach - Base styles for 320px+ */
+
+/* Enhanced touch interactions for mobile */
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: rgba(19, 19, 19, 0.1);
+  touch-action: manipulation;
+}
+
+/* Minimum touch target size for accessibility */
+button,
+a {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Base mobile styles (320px - 479px) */
+@media (max-width: 479px) {
+  :root {
+    /* Reduced spacing for small screens */
+    --space-section-mobile: clamp(3rem, 8vw, 4rem);
+  }
+
   .section {
-    padding: var(--space-10) 0; /* Reduce padding on mobile */
+    padding: var(--space-section-mobile) 0;
   }
 
   .container,
   .container-narrow {
-    padding: 0 var(--space-3); /* Smaller side padding on mobile */
+    padding: 0 var(--space-2); /* 16px padding on very small screens */
   }
 
   .hero-section {
-    /* Additional mobile viewport height handling */
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: var(--space-4) 0;
+  }
+
+  .scroll-indicator {
+    bottom: var(--space-4);
+    transform: translateX(-50%) scale(0.9); /* Slightly smaller on mobile */
+  }
+
+  /* Enhanced button sizing for touch */
+  .button-primary,
+  .button-secondary {
+    padding: 18px 24px; /* Larger touch target */
+    font-size: clamp(1.1rem, 3vw, 1.2rem);
+  }
+
+  /* Improved form inputs for mobile */
+  .form-input-enhanced {
+    padding: 18px 20px; /* Larger touch area */
+    font-size: clamp(1.1rem, 3.5vw, 1.2rem);
+    border-radius: 8px; /* Slightly less rounded for mobile */
+  }
+}
+
+/* Mobile portrait (480px - 767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+  .section {
+    padding: var(--space-10) 0;
+  }
+
+  .container,
+  .container-narrow {
+    padding: 0 var(--space-3);
+  }
+
+  .hero-section {
     min-height: 100vh;
     min-height: 100dvh;
   }
 
   .scroll-indicator {
-    bottom: var(--space-6); /* Closer to bottom on mobile */
+    bottom: var(--space-6);
+  }
+}
+
+/* Tablet portrait (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section {
+    padding: var(--space-12) 0; /* Intermediate padding */
+  }
+
+  .container {
+    padding: 0 var(--space-4);
+  }
+
+  .container-narrow {
+    padding: 0 var(--space-5);
+  }
+
+  /* Optimize grid layouts for tablet */
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .grid-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+/* Tablet landscape and small desktop (1024px - 1199px) */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .section {
+    padding: var(--space-15) 0;
+  }
+
+  .container {
+    padding: 0 var(--space-5);
   }
 }
 
@@ -605,6 +756,134 @@ html {
   gap: 1.5rem;
 }
 
+/* ========================================
+   MICRO-ANIMATIONS AND POLISH
+   ======================================== */
+
+/* Subtle bounce animation for interactive elements */
+@keyframes subtleBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Ripple effect for buttons */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Enhanced button interactions */
+.button-enhanced {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.6s,
+    height 0.6s;
+}
+
+.button-enhanced:active::before {
+  width: 300px;
+  height: 300px;
+  animation: ripple 0.6s ease-out;
+}
+
+.button-enhanced:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+}
+
+.floating-element {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Loading states */
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(238, 228, 227, 0.4) 25%,
+    rgba(238, 228, 227, 0.6) 50%,
+    rgba(238, 228, 227, 0.4) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+.loading-papyrus {
+  background: linear-gradient(90deg, #f4ead5 25%, #f0e6d2 50%, #f4ead5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Error states */
+.error-state {
+  border: 2px dashed rgba(220, 38, 38, 0.3);
+  background: rgba(220, 38, 38, 0.05);
+  color: #dc2626;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.error-state::before {
+  content: '⚠';
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
 /* Enhanced Visual Effects */
 .backdrop-blur-enhanced {
   backdrop-filter: blur(15px) saturate(1.5);
@@ -619,7 +898,7 @@ html {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-/* Enhanced Scroll Indicators */
+/* Enhanced scroll indicators */
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -631,6 +910,112 @@ html {
   transform-origin: left;
   z-index: 1000;
   transition: transform 0.1s ease;
+}
+
+/* Staggered reveal animations */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: staggerReveal 0.6s ease-out forwards;
+}
+
+.stagger-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stagger-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stagger-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stagger-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.stagger-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+@keyframes staggerReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth focus transitions */
+.focus-smooth {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.focus-smooth:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--color-accent),
+    0 0 0 6px rgba(19, 19, 19, 0.1);
+  transform: scale(1.02);
+}
+
+/* Pulse effect for important elements */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.pulse-gentle {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Magnetic hover effect */
+.magnetic-hover {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.magnetic-hover:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* Enhanced link animations */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transition: width 0.3s ease;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Fade-in animation for form validation messages */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
 }
 
 /* Ancient Scroll Card System Styles */
@@ -666,6 +1051,13 @@ html {
   transition: none;
 }
 
+.scroll-card--pressed {
+  transform: scale(0.98);
+  box-shadow:
+    0 4px 16px rgba(139, 119, 85, 0.15),
+    0 2px 8px rgba(139, 119, 85, 0.1);
+}
+
 /* Scroll roll ends - create the rolled paper effect */
 .scroll-card__roll {
   height: 12px;
@@ -678,7 +1070,7 @@ html {
     #d4c4a8 100%
   );
   border-radius: 50px;
-  box-shadow: 
+  box-shadow:
     0 2px 4px rgba(139, 119, 85, 0.3),
     inset 0 1px 2px rgba(255, 255, 255, 0.3);
   position: relative;
@@ -703,19 +1095,12 @@ html {
     radial-gradient(circle at 80% 70%, rgba(218, 190, 150, 0.15) 0%, transparent 50%),
     radial-gradient(circle at 40% 80%, rgba(225, 200, 165, 0.1) 0%, transparent 50%),
     /* Base parchment color */
-    linear-gradient(
-      135deg,
-      #f4ead5 0%,
-      #f0e6d2 25%,
-      #ede2ce 50%,
-      #f0e6d2 75%,
-      #f4ead5 100%
-    );
+      linear-gradient(135deg, #f4ead5 0%, #f0e6d2 25%, #ede2ce 50%, #f0e6d2 75%, #f4ead5 100%);
   border-left: 3px solid #d4c4a8;
   border-right: 3px solid #d4c4a8;
   position: relative;
   padding: 0;
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(139, 119, 85, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
@@ -723,18 +1108,17 @@ html {
 /* Greek meander border patterns */
 .scroll-card__border {
   height: 8px;
-  background-image: 
-    repeating-linear-gradient(
-      to right,
-      #b8a082 0px,
-      #b8a082 8px,
-      transparent 8px,
-      transparent 16px,
-      #b8a082 16px,
-      #b8a082 24px,
-      transparent 24px,
-      transparent 32px
-    );
+  background-image: repeating-linear-gradient(
+    to right,
+    #b8a082 0px,
+    #b8a082 8px,
+    transparent 8px,
+    transparent 16px,
+    #b8a082 16px,
+    #b8a082 24px,
+    transparent 24px,
+    transparent 32px
+  );
   position: relative;
 }
 
@@ -771,7 +1155,7 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
+  background:
     radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 70%),
     radial-gradient(ellipse at 70% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
   opacity: 0;
@@ -803,8 +1187,7 @@ html {
 .project-scroll-card__number-inner {
   width: 60px;
   height: 60px;
-  background: 
-    radial-gradient(circle at 30% 30%, #d4c4a8, #b8a082);
+  background: radial-gradient(circle at 30% 30%, #d4c4a8, #b8a082);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -812,7 +1195,7 @@ html {
   font-size: clamp(1.2rem, 3vw, 1.5rem);
   font-weight: 700;
   color: var(--color-accent);
-  box-shadow: 
+  box-shadow:
     0 4px 12px rgba(139, 119, 85, 0.3),
     inset 0 2px 4px rgba(255, 255, 255, 0.3);
   transform: rotate(-15deg);
@@ -918,13 +1301,12 @@ html {
 .project-scroll-card__tech-tag {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background: 
-    linear-gradient(135deg, #d4c4a8 0%, #b8a082 100%);
+  background: linear-gradient(135deg, #d4c4a8 0%, #b8a082 100%);
   color: var(--color-accent);
   border-radius: 20px;
   font-size: clamp(0.85rem, 1.8vw, 0.95rem);
   font-weight: 600;
-  box-shadow: 
+  box-shadow:
     0 2px 6px rgba(139, 119, 85, 0.3),
     inset 0 1px 2px rgba(255, 255, 255, 0.3);
   transition: all 0.3s ease;
@@ -935,7 +1317,7 @@ html {
 
 .project-scroll-card__tech-tag:hover {
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 4px 12px rgba(139, 119, 85, 0.4),
     inset 0 1px 2px rgba(255, 255, 255, 0.4);
 }
@@ -953,8 +1335,9 @@ html {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.875rem 1.5rem; /* Increased from 0.75rem to ensure 44px minimum height */
   border: none;
+  min-height: 44px; /* Explicit 44px minimum for WCAG compliance */
   border-radius: 25px;
   font-size: clamp(0.9rem, 2vw, 1rem);
   font-weight: 600;
@@ -1011,8 +1394,7 @@ html {
 .project-scroll-card__seal-inner {
   width: 40px;
   height: 40px;
-  background: 
-    radial-gradient(circle at 30% 30%, #8b7755, #6d5e42);
+  background: radial-gradient(circle at 30% 30%, #8b7755, #6d5e42);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1020,7 +1402,7 @@ html {
   color: #f4ead5;
   font-size: 1.2rem;
   font-weight: 700;
-  box-shadow: 
+  box-shadow:
     0 3px 8px rgba(139, 119, 85, 0.4),
     inset 0 1px 2px rgba(255, 255, 255, 0.2);
   animation: sealPulse 3s ease-in-out infinite;
@@ -1048,13 +1430,12 @@ html {
 
 .publication-scroll-card__number-inner {
   padding: 0.5rem 1rem;
-  background: 
-    linear-gradient(135deg, #d4c4a8 0%, #b8a082 100%);
+  background: linear-gradient(135deg, #d4c4a8 0%, #b8a082 100%);
   border-radius: 12px;
   font-size: clamp(1rem, 2.5vw, 1.25rem);
   font-weight: 700;
   color: var(--color-accent);
-  box-shadow: 
+  box-shadow:
     0 3px 8px rgba(139, 119, 85, 0.3),
     inset 0 1px 2px rgba(255, 255, 255, 0.3);
 }
@@ -1220,8 +1601,9 @@ html {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
+  padding: 0.875rem 1.25rem; /* Increased from 0.75rem to ensure 44px minimum height */
   border: none;
+  min-height: 44px; /* Explicit 44px minimum for WCAG compliance */
   border-radius: 20px;
   font-size: clamp(0.85rem, 1.9vw, 0.95rem);
   font-weight: 600;
@@ -1274,8 +1656,7 @@ html {
 .publication-scroll-card__seal-inner {
   width: 35px;
   height: 35px;
-  background: 
-    radial-gradient(circle at 30% 30%, #6d5e42, #4a3e2a);
+  background: radial-gradient(circle at 30% 30%, #6d5e42, #4a3e2a);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1283,7 +1664,7 @@ html {
   color: #d4c4a8;
   font-size: 1.1rem;
   font-weight: 700;
-  box-shadow: 
+  box-shadow:
     0 2px 6px rgba(139, 119, 85, 0.4),
     inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
@@ -1293,7 +1674,8 @@ html {
    ======================================== */
 
 @keyframes projectNumberFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-15deg) translateY(0px);
   }
   50% {
@@ -1309,15 +1691,16 @@ html {
 }
 
 @keyframes sealPulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
-    box-shadow: 
+    box-shadow:
       0 3px 8px rgba(139, 119, 85, 0.4),
       inset 0 1px 2px rgba(255, 255, 255, 0.2);
   }
   50% {
     transform: scale(1.05);
-    box-shadow: 
+    box-shadow:
       0 4px 12px rgba(139, 119, 85, 0.5),
       inset 0 1px 2px rgba(255, 255, 255, 0.3);
   }
@@ -1377,16 +1760,148 @@ html {
   animation-fill-mode: both;
 }
 
-.scroll-card--visible .scroll-card__inner > *:nth-child(1) { animation-delay: 0.2s; }
-.scroll-card--visible .scroll-card__inner > *:nth-child(2) { animation-delay: 0.4s; }
-.scroll-card--visible .scroll-card__inner > *:nth-child(3) { animation-delay: 0.6s; }
-.scroll-card--visible .scroll-card__inner > *:nth-child(4) { animation-delay: 0.8s; }
+.scroll-card--visible .scroll-card__inner > *:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.scroll-card--visible .scroll-card__inner > *:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.scroll-card--visible .scroll-card__inner > *:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.scroll-card--visible .scroll-card__inner > *:nth-child(4) {
+  animation-delay: 0.8s;
+}
 
 /* ========================================
-   RESPONSIVE DESIGN
+   SCROLL CARDS RESPONSIVE DESIGN
    ======================================== */
 
-@media (max-width: 768px) {
+/* Mobile small (320px - 479px) */
+@media (max-width: 479px) {
+  .scroll-card__roll {
+    margin: 0 8px;
+    height: 10px; /* Slightly smaller for mobile */
+  }
+
+  .scroll-card__inner {
+    padding: 1rem;
+  }
+
+  .scroll-card__content {
+    border-left: 2px solid #d4c4a8;
+    border-right: 2px solid #d4c4a8;
+  }
+
+  /* Project cards mobile optimization */
+  .project-scroll-card__header {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .project-scroll-card__flourish {
+    display: none; /* Remove decorative elements on small screens */
+  }
+
+  .project-scroll-card__number {
+    position: static; /* Move to normal flow on mobile */
+    align-self: center;
+    margin-bottom: 1rem;
+  }
+
+  .project-scroll-card__number-inner {
+    width: 50px;
+    height: 50px;
+    transform: none; /* Remove rotation for mobile clarity */
+  }
+
+  .project-scroll-card__title {
+    font-size: clamp(1.2rem, 4vw, 1.4rem);
+  }
+
+  .project-scroll-card__description-text {
+    text-align: left; /* Better readability on mobile */
+    font-size: clamp(0.95rem, 3vw, 1.05rem);
+  }
+
+  .project-scroll-card__tech-list {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .project-scroll-card__tech-tag {
+    padding: 0.4rem 0.8rem;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  }
+
+  .project-scroll-card__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .project-scroll-card__action {
+    justify-content: center;
+    padding: 1rem 1.2rem; /* Increased from 0.9rem to ensure 44px minimum on mobile */
+    font-size: clamp(0.95rem, 3vw, 1.05rem);
+    min-height: 44px; /* Maintain touch target on mobile */
+  }
+
+  .project-scroll-card__seal {
+    position: static;
+    align-self: center;
+    margin-top: 1rem;
+  }
+
+  .project-scroll-card__seal-inner {
+    width: 35px;
+    height: 35px;
+  }
+
+  /* Publication cards mobile optimization */
+  .publication-scroll-card__header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .publication-scroll-card__title {
+    font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+    text-align: center;
+  }
+
+  .publication-scroll-card__authors-text,
+  .publication-scroll-card__journal-text,
+  .publication-scroll-card__abstract-text {
+    font-size: clamp(0.9rem, 2.8vw, 1rem);
+  }
+
+  .publication-scroll-card__metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .publication-scroll-card__metric-value {
+    font-size: clamp(1.2rem, 4vw, 1.4rem);
+  }
+
+  .publication-scroll-card__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .publication-scroll-card__action {
+    justify-content: center;
+    padding: 1rem 1rem; /* Increased from 0.8rem to ensure 44px minimum on mobile */
+    font-size: clamp(0.9rem, 2.8vw, 1rem);
+    min-height: 44px; /* Maintain touch target on mobile */
+  }
+}
+
+/* Mobile portrait (480px - 767px) */
+@media (min-width: 480px) and (max-width: 767px) {
   .scroll-card__inner {
     padding: 1.5rem;
   }
@@ -1401,6 +1916,12 @@ html {
     display: none;
   }
 
+  .project-scroll-card__number-inner,
+  .project-scroll-card__seal-inner,
+  .publication-scroll-card__seal-inner {
+    transform: scale(0.9);
+  }
+
   .project-scroll-card__actions,
   .publication-scroll-card__actions {
     flex-direction: column;
@@ -1413,28 +1934,50 @@ html {
   }
 
   .publication-scroll-card__metrics-grid {
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
     gap: 1rem;
-  }
-
-  .project-scroll-card__number-inner,
-  .project-scroll-card__seal-inner,
-  .publication-scroll-card__seal-inner {
-    transform: scale(0.8);
   }
 }
 
-@media (max-width: 480px) {
-  .scroll-card__roll {
-    margin: 0 10px;
-  }
-
+/* Tablet portrait (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
   .scroll-card__inner {
-    padding: 1rem;
+    padding: 1.75rem;
   }
 
-  .project-scroll-card__tech-list {
-    justify-content: center;
+  /* Show flourishes but smaller */
+  .project-scroll-card__flourish {
+    display: block;
+  }
+
+  .project-scroll-card__flourish::before {
+    font-size: 0.7rem;
+  }
+
+  .project-scroll-card__actions,
+  .publication-scroll-card__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .publication-scroll-card__metrics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+/* Desktop and larger */
+@media (min-width: 1024px) {
+  .scroll-card__inner {
+    padding: 2rem;
+  }
+
+  .project-scroll-card__header {
+    flex-direction: row;
+  }
+
+  .project-scroll-card__flourish {
+    display: block;
   }
 }
 
@@ -1458,7 +2001,7 @@ html {
   .scroll-card__content {
     border: 2px solid var(--color-accent);
   }
-  
+
   .project-scroll-card__tech-tag,
   .project-scroll-card__number-inner,
   .publication-scroll-card__number-inner {

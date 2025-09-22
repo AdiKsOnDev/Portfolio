@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { ProjectScrollCard, ProjectData } from './ScrollCard'
 
 /**
@@ -65,11 +65,7 @@ export function WorkSection() {
 
         <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {projects.map((project, index) => (
-            <ProjectScrollCard
-              key={project.id}
-              project={project}
-              index={index}
-            />
+            <ProjectScrollCard key={project.id} project={project} index={index} />
           ))}
         </div>
       </div>

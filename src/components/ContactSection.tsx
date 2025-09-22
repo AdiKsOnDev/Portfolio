@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 
 /**
  * Form data structure for contact form state management
@@ -13,6 +13,21 @@ interface ContactFormData {
   /** Message content from the contact person */
   message: string
 }
+
+/**
+ * Form validation errors structure
+ */
+interface FormErrors {
+  name?: string
+  email?: string
+  message?: string
+  general?: string
+}
+
+/**
+ * Form submission states
+ */
+type SubmissionState = 'idle' | 'submitting' | 'success' | 'error'
 
 /**
  * ContactSection - Contact form and social links component
@@ -39,6 +54,32 @@ interface ContactFormData {
  * - Transform hover effects: Scale and visual feedback create modern interaction
  *   patterns that feel responsive and polished.
  *
+ * FORM VALIDATION STRATEGY:
+ *
+ * WHY Real-time Validation on Blur:
+ * - Provides immediate feedback without being intrusive during typing
+ * - Reduces cognitive load by validating fields as user completes them
+ * - Prevents jarring validation errors that appear/disappear during active input
+ * - Balances helpful guidance with non-disruptive user experience
+ *
+ * WHY Progressive Error Display:
+ * - Only shows errors after user has interacted with a field (touched state)
+ * - Prevents overwhelming users with validation errors on page load
+ * - Creates natural validation flow that follows user attention patterns
+ * - Maintains form accessibility by not hiding critical validation information
+ *
+ * WHY Comprehensive Submission State Management:
+ * - Visual loading states prevent double-submissions and provide user feedback
+ * - Success/error states give clear indication of form submission outcome
+ * - Submission state controls form interactivity during async operations
+ * - Provides accessibility through ARIA live regions for screen reader announcements
+ *
+ * WHY Client-side Validation Patterns:
+ * - Immediate feedback improves user experience vs server-side only validation
+ * - Reduces unnecessary server requests and bandwidth usage
+ * - Provides familiar web form interaction patterns users expect
+ * - Still requires server-side validation for security (not shown in this component)
+ *
  * @returns JSX element containing the contact section with form and social links
  */
 export function ContactSection() {
@@ -50,46 +91,179 @@ export function ContactSection() {
     message: '',
   })
 
+  // Form validation and submission state
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [submissionState, setSubmissionState] = useState<SubmissionState>('idle')
+  const [touched, setTouched] = useState<{ [key: string]: boolean }>({})
+
   /**
-   * Handles form submission and integration with email services
+   * Validates individual form fields with comprehensive checks
+   */
+  const validateField = useCallback((name: string, value: string): string | undefined => {
+    switch (name) {
+      case 'name':
+        if (!value.trim()) return 'Name is required'
+        if (value.trim().length < 2) return 'Name must be at least 2 characters'
+        if (value.trim().length > 50) return 'Name must be less than 50 characters'
+        return undefined
+
+      case 'email':
+        if (!value.trim()) return 'Email is required'
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(value)) return 'Please enter a valid email address'
+        return undefined
+
+      case 'message':
+        if (!value.trim()) return 'Message is required'
+        if (value.trim().length < 10) return 'Message must be at least 10 characters'
+        if (value.trim().length > 1000) return 'Message must be less than 1000 characters'
+        return undefined
+
+      default:
+        return undefined
+    }
+  }, [])
+
+  /**
+   * Validates the entire form and returns errors object
+   */
+  const validateForm = useCallback((): FormErrors => {
+    const newErrors: FormErrors = {}
+
+    Object.entries(formData).forEach(([key, value]) => {
+      const error = validateField(key, value)
+      if (error) {
+        newErrors[key as keyof FormErrors] = error
+      }
+    })
+
+    return newErrors
+  }, [formData, validateField])
+
+  /**
+   * Handles form submission with validation and user feedback
    *
-   * Currently logs to console for development purposes. In production,
-   * this should integrate with email services like:
-   * - EmailJS for client-side email sending
-   * - Formspree for form handling service
-   * - Custom API endpoint for server-side processing
-   * - Netlify Forms for static site form handling
+   * Provides comprehensive validation, loading states, and error handling
+   * for a polished user experience. Includes accessibility considerations
+   * and mobile-optimized interactions.
    *
    * @param e - Form submission event
    */
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // TODO: Replace with actual email service integration
-    // Example integrations:
-    // - EmailJS: emailjs.send('service_id', 'template_id', formData)
-    // - Custom API: fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) })
-    console.log('Form submitted:', formData)
+    // Validate form before submission
+    const formErrors = validateForm()
+    setErrors(formErrors)
 
-    // Reset form state after successful submission
-    // In production, only reset after confirming successful send
-    setFormData({ name: '', email: '', message: '' })
+    // Don't submit if there are validation errors
+    if (Object.keys(formErrors).length > 0) {
+      // Focus first error field for better UX
+      const firstErrorField = Object.keys(formErrors)[0]
+      const element = document.getElementById(firstErrorField)
+      element?.focus()
+      return
+    }
+
+    setSubmissionState('submitting')
+    setErrors({})
+
+    try {
+      // Simulate API call - replace with actual email service integration
+      // Example integrations:
+      // - EmailJS: await emailjs.send('service_id', 'template_id', formData)
+      // - Custom API: await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) })
+
+      // Simulated delay for demonstration
+      await new Promise(resolve => setTimeout(resolve, 2000))
+
+      // For demo purposes, randomly succeed or fail
+      if (Math.random() > 0.3) {
+        console.log('Form submitted successfully:', formData)
+        setSubmissionState('success')
+
+        // Reset form after successful submission
+        setFormData({ name: '', email: '', message: '' })
+        setTouched({})
+
+        // Show success message for 5 seconds, then reset
+        setTimeout(() => {
+          setSubmissionState('idle')
+        }, 5000)
+      } else {
+        throw new Error('Simulated network error')
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setSubmissionState('error')
+      setErrors({
+        general: 'Failed to send message. Please try again or contact me directly via email.',
+      })
+
+      // Reset error state after 10 seconds
+      setTimeout(() => {
+        setSubmissionState('idle')
+        setErrors({})
+      }, 10000)
+    }
   }
 
   /**
-   * Handles form input changes with proper TypeScript typing
+   * Handles form input changes with real-time validation
    *
    * Uses dynamic property access to update the correct form field
-   * based on the input's name attribute, enabling reusable change handler
+   * based on the input's name attribute, enabling reusable change handler.
+   * Provides real-time validation feedback for better UX.
    *
    * @param e - Input change event from form fields
    */
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
-  }
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target
+
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+      }))
+
+      // Clear errors for this field when user starts typing
+      if (errors[name as keyof FormErrors]) {
+        setErrors(prev => ({
+          ...prev,
+          [name]: undefined,
+        }))
+      }
+    },
+    [errors]
+  )
+
+  /**
+   * Handles input blur events for validation feedback
+   *
+   * Validates individual fields when user finishes editing
+   * to provide immediate feedback without being intrusive
+   *
+   * @param e - Blur event from form fields
+   */
+  const handleBlur = useCallback(
+    (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target
+
+      // Mark field as touched
+      setTouched(prev => ({
+        ...prev,
+        [name]: true,
+      }))
+
+      // Validate field on blur
+      const error = validateField(name, value)
+      setErrors(prev => ({
+        ...prev,
+        [name]: error,
+      }))
+    },
+    [validateField]
+  )
 
   return (
     <section
@@ -131,9 +305,10 @@ export function ContactSection() {
                   lineHeight: '1.7',
                 }}
               >
-                I&apos;m passionate about advancing AI/ML research and building innovative automation solutions. 
-                Whether you&apos;re interested in research collaboration, have an AI project in mind, 
-                or want to discuss conventional code practices in machine learning, I&apos;d love to connect.
+                I&apos;m passionate about advancing AI/ML research and building innovative
+                automation solutions. Whether you&apos;re interested in research collaboration, have
+                an AI project in mind, or want to discuss conventional code practices in machine
+                learning, I&apos;d love to connect.
               </p>
 
               <div className="space-y-4">
@@ -153,7 +328,7 @@ export function ContactSection() {
                     lineHeight: '1.6',
                   }}
                 >
-                  <strong className="text-accent">Best for:</strong> AI/ML research collaboration, 
+                  <strong className="text-accent">Best for:</strong> AI/ML research collaboration,
                   automation projects, technical discussions, academic partnerships
                 </div>
               </div>
@@ -268,16 +443,24 @@ export function ContactSection() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     required
-                    className="w-full px-5 py-4 border-2 border-foreground/20 rounded-xl text-accent placeholder-foreground/50 focus:border-accent focus:outline-none transition-all duration-300 hover:border-foreground/30"
-                    style={{
-                      backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                      fontSize: 'clamp(1rem, 2.2vw, 1.125rem)',
-                      backdropFilter: 'blur(10px)',
-                    }}
+                    className={`form-input-enhanced button-enhanced focus-smooth w-full ${
+                      errors.name && touched.name ? 'border-red-400' : ''
+                    }`}
                     placeholder="Your full name"
-                    aria-describedby="name-help"
+                    aria-describedby={errors.name ? 'name-error' : 'name-help'}
+                    aria-invalid={!!(errors.name && touched.name)}
                   />
+                  {errors.name && touched.name && (
+                    <div
+                      id="name-error"
+                      className="text-red-500 text-sm mt-2 animate-fade-in"
+                      role="alert"
+                    >
+                      {errors.name}
+                    </div>
+                  )}
                 </div>
 
                 <div>
@@ -341,32 +524,131 @@ export function ContactSection() {
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <button
                   type="submit"
-                  className="flex-1 bg-accent text-background py-4 px-8 rounded-xl font-bold hover:bg-accent/90 transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background flex items-center justify-center gap-2"
+                  disabled={submissionState === 'submitting'}
+                  className={`flex-1 py-4 px-8 rounded-xl font-bold transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background flex items-center justify-center gap-2 min-h-[44px] ${
+                    submissionState === 'submitting'
+                      ? 'bg-accent/50 text-background/70 cursor-not-allowed'
+                      : 'bg-accent text-background hover:bg-accent/90 hover:scale-[1.02]'
+                  }`}
                   style={{
                     fontSize: 'clamp(1rem, 2.2vw, 1.125rem)',
                   }}
                 >
-                  <span>Send Message</span>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                    />
-                  </svg>
+                  {submissionState === 'submitting' ? (
+                    <>
+                      <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Send Message</span>
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                        />
+                      </svg>
+                    </>
+                  )}
                 </button>
                 <button
                   type="button"
-                  className="sm:flex-none px-8 py-4 border-2 border-accent/30 text-accent rounded-xl font-semibold hover:border-accent hover:bg-accent/10 transition-all duration-300"
+                  disabled={submissionState === 'submitting'}
+                  className={`sm:flex-none px-8 py-4 border-2 rounded-xl font-semibold transition-all duration-300 min-h-[44px] ${
+                    submissionState === 'submitting'
+                      ? 'border-accent/20 text-accent/50 cursor-not-allowed'
+                      : 'border-accent/30 text-accent hover:border-accent hover:bg-accent/10'
+                  }`}
                   style={{
                     fontSize: 'clamp(1rem, 2.2vw, 1.125rem)',
                   }}
-                  onClick={() => setFormData({ name: '', email: '', message: '' })}
+                  onClick={() => {
+                    setFormData({ name: '', email: '', message: '' })
+                    setErrors({})
+                    setTouched({})
+                    setSubmissionState('idle')
+                  }}
                 >
                   Clear
                 </button>
               </div>
+
+              {/* Success/Error Message Display */}
+              {submissionState === 'success' && (
+                <div
+                  className="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl animate-fade-in"
+                  role="alert"
+                  aria-live="polite"
+                >
+                  <div className="flex items-center gap-3">
+                    <svg
+                      className="w-5 h-5 text-green-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    <p className="text-green-800 font-medium">
+                      Message sent successfully! Thank you for reaching out.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {submissionState === 'error' && (
+                <div
+                  className="mt-6 p-4 bg-red-50 border border-red-200 rounded-xl animate-fade-in"
+                  role="alert"
+                  aria-live="polite"
+                >
+                  <div className="flex items-center gap-3">
+                    <svg
+                      className="w-5 h-5 text-red-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <div className="text-red-800">
+                      <p className="font-medium">Unable to send message</p>
+                      <p className="text-sm">Please try again or contact me directly.</p>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               <div className="pt-4 border-t border-foreground/10">
                 <p

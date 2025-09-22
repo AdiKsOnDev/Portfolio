@@ -31,13 +31,13 @@ export interface ProjectScrollCardProps {
 
 /**
  * ProjectScrollCard - Ancient scroll-themed project showcase component
- * 
+ *
  * Displays project information in an authentic ancient scroll design with:
  * - Project title as scroll header with decorative flourishes
  * - Technology tags styled as clay tablets
  * - Description in ink-style typography
  * - Action buttons as ancient Greek symbols/wax seals
- * 
+ *
  * Features Greek cultural elements while maintaining modern usability.
  */
 export function ProjectScrollCard({
@@ -66,21 +66,22 @@ export function ProjectScrollCard({
       <div className="project-scroll-card__content">
         {/* Project Title with Decorative Flourishes */}
         <div className="project-scroll-card__header">
-          <div className="project-scroll-card__flourish project-scroll-card__flourish--left" aria-hidden="true" />
-          <h3
-            id={`project-title-${project.id}`}
-            className="project-scroll-card__title"
-          >
+          <div
+            className="project-scroll-card__flourish project-scroll-card__flourish--left"
+            aria-hidden="true"
+          />
+          <h3 id={`project-title-${project.id}`} className="project-scroll-card__title">
             {project.title}
           </h3>
-          <div className="project-scroll-card__flourish project-scroll-card__flourish--right" aria-hidden="true" />
+          <div
+            className="project-scroll-card__flourish project-scroll-card__flourish--right"
+            aria-hidden="true"
+          />
         </div>
 
         {/* Project Description - Ink Style Typography */}
         <div className="project-scroll-card__description">
-          <p className="project-scroll-card__description-text">
-            {project.description}
-          </p>
+          <p className="project-scroll-card__description-text">{project.description}</p>
         </div>
 
         {/* Technology Tags - Clay Tablet Style */}
@@ -88,7 +89,9 @@ export function ProjectScrollCard({
           <h4 className="project-scroll-card__tech-label">
             {/* Greek amphora symbol (⚱) represents ancient storage vessels used for scrolls and knowledge */}
             {/* Culturally appropriate choice that connects technology concepts to ancient wisdom preservation */}
-            <span className="project-scroll-card__tech-icon" aria-hidden="true">⚱</span>
+            <span className="project-scroll-card__tech-icon" aria-hidden="true">
+              ⚱
+            </span>
             Technologies
           </h4>
           <ul
@@ -100,7 +103,7 @@ export function ProjectScrollCard({
                 <span
                   className="project-scroll-card__tech-tag"
                   style={{
-                    animationDelay: `${defaultDelay + (tagIndex * 100)}ms`,
+                    animationDelay: `${defaultDelay + tagIndex * 100}ms`,
                   }}
                 >
                   {tag}
@@ -116,9 +119,7 @@ export function ProjectScrollCard({
             className="project-scroll-card__action project-scroll-card__action--primary"
             aria-label={`View ${project.title} project details`}
           >
-            <span className="project-scroll-card__action-icon" aria-hidden="true">
-              
-            </span>
+            <span className="project-scroll-card__action-icon" aria-hidden="true"></span>
             <span className="project-scroll-card__action-text">View Project</span>
             <svg
               className="project-scroll-card__action-arrow"
@@ -135,14 +136,12 @@ export function ProjectScrollCard({
               />
             </svg>
           </button>
-          
+
           <button
             className="project-scroll-card__action project-scroll-card__action--secondary"
             aria-label={`View ${project.title} source code`}
           >
-            <span className="project-scroll-card__action-icon" aria-hidden="true">
-              
-            </span>
+            <span className="project-scroll-card__action-icon" aria-hidden="true"></span>
             <span className="project-scroll-card__action-text">Source Code</span>
           </button>
         </div>

@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { PublicationScrollCard, PublicationData } from './ScrollCard'
 
 /**
@@ -31,7 +31,8 @@ export function PublicationsSection() {
   const publications: PublicationData[] = [
     {
       id: 1,
-      title: 'Automated Feature Engineering for Deep Learning Models Using Conventional Code Practices',
+      title:
+        'Automated Feature Engineering for Deep Learning Models Using Conventional Code Practices',
       journal: 'Nature Machine Intelligence',
       year: '2024',
       authors: 'Adil Alizada, Dr. Elena Petrov, Michael Zhang',
@@ -79,11 +80,7 @@ export function PublicationsSection() {
 
         <div className="max-w-5xl mx-auto space-y-8">
           {publications.map((publication, index) => (
-            <PublicationScrollCard
-              key={publication.id}
-              publication={publication}
-              index={index}
-            />
+            <PublicationScrollCard key={publication.id} publication={publication} index={index} />
           ))}
         </div>
       </div>

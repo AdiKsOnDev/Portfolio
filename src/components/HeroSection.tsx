@@ -75,7 +75,8 @@ export function HeroSection() {
             opacity: '0.8',
           }}
         >
-          Passionate about conventional code, automation, and advancing the frontiers of artificial intelligence
+          Passionate about conventional code, automation, and advancing the frontiers of artificial
+          intelligence
         </p>
       </div>
 

@@ -56,8 +56,8 @@ export function AboutSection() {
                 }}
               >
                 An AI/ML Engineer and Researcher passionate about conventional code and automation.
-                Dedicated to advancing the frontiers of artificial intelligence through rigorous research
-                and practical applications that solve real-world problems.
+                Dedicated to advancing the frontiers of artificial intelligence through rigorous
+                research and practical applications that solve real-world problems.
               </p>
 
               <p
@@ -82,8 +82,8 @@ export function AboutSection() {
                 }}
               >
                 My approach combines rigorous scientific methodology with engineering excellence to
-                deliver AI systems that are reliable, scalable, and maintainable. I believe great
-                AI emerges from understanding both the mathematical foundations and practical
+                deliver AI systems that are reliable, scalable, and maintainable. I believe great AI
+                emerges from understanding both the mathematical foundations and practical
                 implementation challenges.
               </p>
             </div>
@@ -97,8 +97,8 @@ export function AboutSection() {
                   fontStyle: 'italic',
                 }}
               >
-                &quot;Conventional code and thoughtful automation are the foundation of
-                reliable AI systems.&quot;
+                &quot;Conventional code and thoughtful automation are the foundation of reliable AI
+                systems.&quot;
               </p>
             </div>
           </div>
@@ -129,28 +129,26 @@ export function AboutSection() {
                     Machine Learning & AI
                   </h4>
                   <div className="grid grid-cols-2 gap-3">
-                    {['Deep Learning', 'Neural Networks', 'Computer Vision', 'NLP'].map(
-                      skill => (
-                        <div
-                          key={skill}
-                          className="flex items-center text-foreground"
+                    {['Deep Learning', 'Neural Networks', 'Computer Vision', 'NLP'].map(skill => (
+                      <div
+                        key={skill}
+                        className="flex items-center text-foreground"
+                        style={{
+                          fontSize: 'clamp(0.9rem, 2vw, 1rem)',
+                          lineHeight: '1.5',
+                        }}
+                      >
+                        <span
+                          className="bg-accent rounded-full mr-3 flex-shrink-0"
                           style={{
-                            fontSize: 'clamp(0.9rem, 2vw, 1rem)',
-                            lineHeight: '1.5',
+                            width: '6px',
+                            height: '6px',
                           }}
-                        >
-                          <span
-                            className="bg-accent rounded-full mr-3 flex-shrink-0"
-                            style={{
-                              width: '6px',
-                              height: '6px',
-                            }}
-                            aria-hidden="true"
-                          ></span>
-                          {skill}
-                        </div>
-                      )
-                    )}
+                          aria-hidden="true"
+                        ></span>
+                        {skill}
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -204,30 +202,28 @@ export function AboutSection() {
                     Research & Automation
                   </h4>
                   <div className="grid grid-cols-1 gap-3">
-                    {[
-                      'Research Methodology',
-                      'CI/CD & Automation',
-                      'Code Quality & Testing',
-                    ].map(skill => (
-                      <div
-                        key={skill}
-                        className="flex items-center text-foreground"
-                        style={{
-                          fontSize: 'clamp(0.9rem, 2vw, 1rem)',
-                          lineHeight: '1.5',
-                        }}
-                      >
-                        <span
-                          className="bg-accent rounded-full mr-3 flex-shrink-0"
+                    {['Research Methodology', 'CI/CD & Automation', 'Code Quality & Testing'].map(
+                      skill => (
+                        <div
+                          key={skill}
+                          className="flex items-center text-foreground"
                           style={{
-                            width: '6px',
-                            height: '6px',
+                            fontSize: 'clamp(0.9rem, 2vw, 1rem)',
+                            lineHeight: '1.5',
                           }}
-                          aria-hidden="true"
-                        ></span>
-                        {skill}
-                      </div>
-                    ))}
+                        >
+                          <span
+                            className="bg-accent rounded-full mr-3 flex-shrink-0"
+                            style={{
+                              width: '6px',
+                              height: '6px',
+                            }}
+                            aria-hidden="true"
+                          ></span>
+                          {skill}
+                        </div>
+                      )
+                    )}
                   </div>
                 </div>
               </div>
