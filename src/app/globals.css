@@ -419,6 +419,1019 @@ html {
   }
 }
 
+/* Enhanced Section Animations */
+.section-enter {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+}
+
+.section-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced Card Hover Effects */
+.card-hover-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-hover-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.card-hover-effect:hover::before {
+  left: 100%;
+}
+
+/* Enhanced Focus Styles for Better Accessibility */
+.focus-enhanced:focus {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(19, 19, 19, 0.1);
+  transition: all 0.2s ease;
+}
+
+/* Improved Form Input Styles */
+.form-input-enhanced {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(93, 89, 83, 0.2);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  color: var(--color-accent);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.form-input-enhanced:hover {
+  border-color: rgba(93, 89, 83, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.form-input-enhanced:focus {
+  border-color: var(--color-accent);
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(19, 19, 19, 0.1);
+}
+
+.form-input-enhanced::placeholder {
+  color: rgba(93, 89, 83, 0.5);
+}
+
+/* Enhanced Button Styles */
+.button-primary {
+  background: var(--color-accent);
+  color: var(--color-background);
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(19, 19, 19, 0.1);
+}
+
+.button-primary:hover {
+  background: rgba(19, 19, 19, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(19, 19, 19, 0.2);
+}
+
+.button-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(19, 19, 19, 0.2);
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--color-accent);
+  padding: 16px 32px;
+  border: 2px solid rgba(19, 19, 19, 0.3);
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button-secondary:hover {
+  border-color: var(--color-accent);
+  background: rgba(19, 19, 19, 0.1);
+}
+
+/* Enhanced Typography Classes */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-accent), rgba(19, 19, 19, 0.7));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Enhanced Spacing Utilities */
+.space-section {
+  padding: clamp(5rem, 12vw, 7.5rem) 0;
+}
+
+.space-section-small {
+  padding: clamp(3rem, 8vw, 5rem) 0;
+}
+
+/* Enhanced Grid and Layout Utilities */
+.grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.grid-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Enhanced Visual Effects */
+.backdrop-blur-enhanced {
+  backdrop-filter: blur(15px) saturate(1.5);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced Scroll Indicators */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-accent), rgba(19, 19, 19, 0.7));
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: 1000;
+  transition: transform 0.1s ease;
+}
+
+/* Ancient Scroll Card System Styles */
+
+/* ========================================
+   SCROLL CARD FOUNDATION
+   ======================================== */
+
+/* Base scroll card container */
+.scroll-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  transform: translateY(50px);
+  opacity: 0;
+  transition: all 0.8s ease-out;
+}
+
+.scroll-card--visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.scroll-card--hidden {
+  transform: translateY(50px);
+  opacity: 0;
+}
+
+.scroll-card--no-animation {
+  transform: none;
+  opacity: 1;
+  transition: none;
+}
+
+/* Scroll roll ends - create the rolled paper effect */
+.scroll-card__roll {
+  height: 12px;
+  background: linear-gradient(
+    to right,
+    #d4c4a8 0%,
+    #e8d5b5 15%,
+    #f2e6d0 30%,
+    #e8d5b5 85%,
+    #d4c4a8 100%
+  );
+  border-radius: 50px;
+  box-shadow: 
+    0 2px 4px rgba(139, 119, 85, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  position: relative;
+  margin: 0 20px;
+}
+
+.scroll-card__roll--top {
+  transform: perspective(200px) rotateX(25deg);
+  transform-origin: bottom;
+}
+
+.scroll-card__roll--bottom {
+  transform: perspective(200px) rotateX(-25deg);
+  transform-origin: top;
+}
+
+/* Main scroll content area */
+.scroll-card__content {
+  background: 
+    /* Papyrus texture */
+    radial-gradient(circle at 20% 30%, rgba(211, 180, 140, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(218, 190, 150, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(225, 200, 165, 0.1) 0%, transparent 50%),
+    /* Base parchment color */
+    linear-gradient(
+      135deg,
+      #f4ead5 0%,
+      #f0e6d2 25%,
+      #ede2ce 50%,
+      #f0e6d2 75%,
+      #f4ead5 100%
+    );
+  border-left: 3px solid #d4c4a8;
+  border-right: 3px solid #d4c4a8;
+  position: relative;
+  padding: 0;
+  box-shadow: 
+    0 8px 24px rgba(139, 119, 85, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Greek meander border patterns */
+.scroll-card__border {
+  height: 8px;
+  background-image: 
+    repeating-linear-gradient(
+      to right,
+      #b8a082 0px,
+      #b8a082 8px,
+      transparent 8px,
+      transparent 16px,
+      #b8a082 16px,
+      #b8a082 24px,
+      transparent 24px,
+      transparent 32px
+    );
+  position: relative;
+}
+
+.scroll-card__border::before,
+.scroll-card__border::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  height: 4px;
+  background: #b8a082;
+}
+
+.scroll-card__border::before {
+  left: 4px;
+  width: 12px;
+}
+
+.scroll-card__border::after {
+  right: 4px;
+  width: 12px;
+}
+
+/* Inner content padding */
+.scroll-card__inner {
+  padding: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Parchment flutter effect overlay */
+.scroll-card__flutter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 70%),
+    radial-gradient(ellipse at 70% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  border-radius: 4px;
+}
+
+.scroll-card:hover .scroll-card__flutter {
+  opacity: 1;
+}
+
+/* ========================================
+   PROJECT SCROLL CARD STYLES
+   ======================================== */
+
+.project-scroll-card {
+  max-width: 100%;
+}
+
+/* Project number styling */
+.project-scroll-card__number {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 10;
+}
+
+.project-scroll-card__number-inner {
+  width: 60px;
+  height: 60px;
+  background: 
+    radial-gradient(circle at 30% 30%, #d4c4a8, #b8a082);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: var(--color-accent);
+  box-shadow: 
+    0 4px 12px rgba(139, 119, 85, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  transform: rotate(-15deg);
+  animation: projectNumberFloat 4s ease-in-out infinite;
+}
+
+/* Project header with flourishes */
+.project-scroll-card__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.project-scroll-card__flourish {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    #b8a082 20%,
+    #d4c4a8 50%,
+    #b8a082 80%,
+    transparent 100%
+  );
+  position: relative;
+}
+
+.project-scroll-card__flourish::before {
+  content: '⚜';
+  position: absolute;
+  top: -8px;
+  font-size: 0.8rem;
+  color: #b8a082;
+}
+
+.project-scroll-card__flourish--left::before {
+  left: 20%;
+}
+
+.project-scroll-card__flourish--right::before {
+  right: 20%;
+}
+
+.project-scroll-card__title {
+  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--color-accent);
+  text-align: center;
+  flex: none;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(139, 119, 85, 0.1);
+}
+
+/* Project description */
+.project-scroll-card__description {
+  margin-bottom: 2rem;
+}
+
+.project-scroll-card__description-text {
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--color-foreground);
+  text-align: justify;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Technology section */
+.project-scroll-card__technologies {
+  margin-bottom: 2rem;
+}
+
+.project-scroll-card__tech-label {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.project-scroll-card__tech-icon {
+  font-size: 1.2em;
+}
+
+.project-scroll-card__tech-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.project-scroll-card__tech-item {
+  margin: 0;
+}
+
+.project-scroll-card__tech-tag {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: 
+    linear-gradient(135deg, #d4c4a8 0%, #b8a082 100%);
+  color: var(--color-accent);
+  border-radius: 20px;
+  font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+  font-weight: 600;
+  box-shadow: 
+    0 2px 6px rgba(139, 119, 85, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  transform: translateY(10px);
+  opacity: 0;
+  animation: techTagFadeIn 0.5s ease forwards;
+}
+
+.project-scroll-card__tech-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 12px rgba(139, 119, 85, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+/* Project actions */
+.project-scroll-card__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(184, 160, 130, 0.3);
+}
+
+.project-scroll-card__action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  background: none;
+}
+
+.project-scroll-card__action--primary {
+  background: var(--color-accent);
+  color: var(--color-background);
+  box-shadow: 0 4px 12px rgba(19, 19, 19, 0.2);
+}
+
+.project-scroll-card__action--primary:hover {
+  background: rgba(19, 19, 19, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(19, 19, 19, 0.3);
+}
+
+.project-scroll-card__action--secondary {
+  color: var(--color-accent);
+  border: 2px solid rgba(19, 19, 19, 0.2);
+}
+
+.project-scroll-card__action--secondary:hover {
+  border-color: var(--color-accent);
+  background: rgba(19, 19, 19, 0.05);
+}
+
+.project-scroll-card__action-icon {
+  font-size: 1.1em;
+}
+
+.project-scroll-card__action-arrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.project-scroll-card__action:hover .project-scroll-card__action-arrow {
+  transform: translateX(4px);
+}
+
+/* Project seal */
+.project-scroll-card__seal {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.5rem;
+  z-index: 5;
+}
+
+.project-scroll-card__seal-inner {
+  width: 40px;
+  height: 40px;
+  background: 
+    radial-gradient(circle at 30% 30%, #8b7755, #6d5e42);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f4ead5;
+  font-size: 1.2rem;
+  font-weight: 700;
+  box-shadow: 
+    0 3px 8px rgba(139, 119, 85, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  animation: sealPulse 3s ease-in-out infinite;
+}
+
+/* ========================================
+   PUBLICATION SCROLL CARD STYLES
+   ======================================== */
+
+.publication-scroll-card {
+  max-width: 100%;
+}
+
+/* Publication header */
+.publication-scroll-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.publication-scroll-card__number {
+  flex: none;
+}
+
+.publication-scroll-card__number-inner {
+  padding: 0.5rem 1rem;
+  background: 
+    linear-gradient(135deg, #d4c4a8 0%, #b8a082 100%);
+  border-radius: 12px;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 700;
+  color: var(--color-accent);
+  box-shadow: 
+    0 3px 8px rgba(139, 119, 85, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.publication-scroll-card__year {
+  flex: none;
+}
+
+.publication-scroll-card__year-inner {
+  padding: 0.5rem 1rem;
+  background: var(--color-accent);
+  color: var(--color-background);
+  border-radius: 12px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: 600;
+  box-shadow: 0 3px 8px rgba(19, 19, 19, 0.2);
+}
+
+/* Publication title section */
+.publication-scroll-card__title-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.publication-scroll-card__academic-border {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    #b8a082 25%,
+    #d4c4a8 50%,
+    #b8a082 75%,
+    transparent 100%
+  );
+  margin: 1rem 0;
+  position: relative;
+}
+
+.publication-scroll-card__academic-border::before {
+  content: '◊';
+  position: absolute;
+  left: 50%;
+  top: -8px;
+  transform: translateX(-50%);
+  background: #f4ead5;
+  padding: 0 0.5rem;
+  color: #b8a082;
+  font-size: 0.8rem;
+}
+
+.publication-scroll-card__title {
+  font-size: clamp(1.3rem, 3.2vw, 1.6rem);
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1.3;
+  margin: 0;
+  font-family: 'Times New Roman', serif;
+}
+
+/* Publication content sections */
+.publication-scroll-card__content > div {
+  margin-bottom: 1.5rem;
+}
+
+.publication-scroll-card__authors,
+.publication-scroll-card__journal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.publication-scroll-card__authors-label,
+.publication-scroll-card__journal-label,
+.publication-scroll-card__abstract-label,
+.publication-scroll-card__metrics-label {
+  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+  font-weight: 600;
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.publication-scroll-card__authors-text {
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  color: var(--color-accent);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.publication-scroll-card__journal-text {
+  font-size: clamp(0.95rem, 2.1vw, 1.05rem);
+  color: var(--color-foreground);
+  font-style: italic;
+}
+
+/* Abstract section */
+.publication-scroll-card__abstract {
+  margin: 2rem 0;
+}
+
+.publication-scroll-card__abstract-content {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #b8a082;
+  margin-top: 1rem;
+}
+
+.publication-scroll-card__abstract-text {
+  font-size: clamp(0.95rem, 2.1vw, 1.05rem);
+  line-height: 1.7;
+  color: var(--color-foreground);
+  text-align: justify;
+  margin: 0;
+}
+
+/* Academic metrics */
+.publication-scroll-card__metrics {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(184, 160, 130, 0.3);
+}
+
+.publication-scroll-card__metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.publication-scroll-card__metric {
+  text-align: center;
+}
+
+.publication-scroll-card__metric-value {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 0.25rem;
+}
+
+.publication-scroll-card__metric-label {
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  color: var(--color-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Publication actions */
+.publication-scroll-card__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(184, 160, 130, 0.3);
+}
+
+.publication-scroll-card__action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 20px;
+  font-size: clamp(0.85rem, 1.9vw, 0.95rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  background: none;
+}
+
+.publication-scroll-card__action--primary {
+  background: var(--color-accent);
+  color: var(--color-background);
+  box-shadow: 0 3px 8px rgba(19, 19, 19, 0.2);
+}
+
+.publication-scroll-card__action--primary:hover {
+  background: rgba(19, 19, 19, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(19, 19, 19, 0.3);
+}
+
+.publication-scroll-card__action--secondary {
+  color: var(--color-accent);
+  border: 1px solid rgba(19, 19, 19, 0.2);
+}
+
+.publication-scroll-card__action--secondary:hover {
+  border-color: var(--color-accent);
+  background: rgba(19, 19, 19, 0.05);
+}
+
+.publication-scroll-card__action-download {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
+}
+
+.publication-scroll-card__action:hover .publication-scroll-card__action-download {
+  transform: translateY(2px);
+}
+
+/* Publication seal */
+.publication-scroll-card__seal {
+  position: absolute;
+  bottom: 1rem;
+  left: 1.5rem;
+  z-index: 5;
+}
+
+.publication-scroll-card__seal-inner {
+  width: 35px;
+  height: 35px;
+  background: 
+    radial-gradient(circle at 30% 30%, #6d5e42, #4a3e2a);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d4c4a8;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 
+    0 2px 6px rgba(139, 119, 85, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================
+   SCROLL CARD ANIMATIONS
+   ======================================== */
+
+@keyframes projectNumberFloat {
+  0%, 100% {
+    transform: rotate(-15deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(-15deg) translateY(-3px);
+  }
+}
+
+@keyframes techTagFadeIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes sealPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 3px 8px rgba(139, 119, 85, 0.4),
+      inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 
+      0 4px 12px rgba(139, 119, 85, 0.5),
+      inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Animation Performance Strategy - Scroll Unroll Effect
+ * 
+ * EASING CHOICES:
+ * - ease-out creates natural deceleration mimicking physics
+ * - 0.8s duration balances engagement with perceived performance
+ * - scaleY transform triggers GPU acceleration for smooth rendering
+ * 
+ * GPU OPTIMIZATION:
+ * - transform properties trigger hardware acceleration
+ * - opacity changes avoid layout recalculation
+ * - transform-origin: top creates authentic papyrus unrolling physics
+ * 
+ * UX REASONING:
+ * - 50% midpoint creates realistic scroll reveal progression
+ * - Opacity progression (0 → 0.7 → 1) mimics ink appearing on parchment
+ * - scaleY animation simulates authentic manuscript unrolling behavior
+ */
+@keyframes scrollUnroll {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top; /* Unroll from top like ancient scrolls */
+    opacity: 0;
+  }
+  50% {
+    transform: scaleY(0.5);
+    opacity: 0.7; /* Gradual ink appearance effect */
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.scroll-card--visible .scroll-card__content {
+  animation: scrollUnroll 0.8s ease-out;
+}
+
+/* Ink fade-in effect for text content */
+@keyframes inkFadeIn {
+  0% {
+    opacity: 0;
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.scroll-card--visible .scroll-card__inner > * {
+  animation: inkFadeIn 1s ease-out;
+  animation-fill-mode: both;
+}
+
+.scroll-card--visible .scroll-card__inner > *:nth-child(1) { animation-delay: 0.2s; }
+.scroll-card--visible .scroll-card__inner > *:nth-child(2) { animation-delay: 0.4s; }
+.scroll-card--visible .scroll-card__inner > *:nth-child(3) { animation-delay: 0.6s; }
+.scroll-card--visible .scroll-card__inner > *:nth-child(4) { animation-delay: 0.8s; }
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .scroll-card__inner {
+    padding: 1.5rem;
+  }
+
+  .project-scroll-card__header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .project-scroll-card__flourish {
+    display: none;
+  }
+
+  .project-scroll-card__actions,
+  .publication-scroll-card__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .project-scroll-card__action,
+  .publication-scroll-card__action {
+    justify-content: center;
+  }
+
+  .publication-scroll-card__metrics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 1rem;
+  }
+
+  .project-scroll-card__number-inner,
+  .project-scroll-card__seal-inner,
+  .publication-scroll-card__seal-inner {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-card__roll {
+    margin: 0 10px;
+  }
+
+  .scroll-card__inner {
+    padding: 1rem;
+  }
+
+  .project-scroll-card__tech-list {
+    justify-content: center;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY ENHANCEMENTS
+   ======================================== */
+
+.scroll-card:focus-within {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.project-scroll-card__action:focus,
+.publication-scroll-card__action:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .scroll-card__content {
+    border: 2px solid var(--color-accent);
+  }
+  
+  .project-scroll-card__tech-tag,
+  .project-scroll-card__number-inner,
+  .publication-scroll-card__number-inner {
+    border: 1px solid var(--color-accent);
+  }
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -453,5 +1466,47 @@ html {
   .greek-letter {
     transition: none !important;
     animation: none !important;
+  }
+
+  .section-enter {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .text-gradient {
+    animation: none;
+    background: var(--color-accent);
+    background-clip: unset;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+  }
+
+  .card-hover-effect::before {
+    display: none;
+  }
+
+  /* Scroll card specific reduced motion */
+  .scroll-card,
+  .scroll-card--visible,
+  .scroll-card--hidden {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .scroll-card__content,
+  .scroll-card__inner > *,
+  .project-scroll-card__tech-tag,
+  .project-scroll-card__number-inner,
+  .project-scroll-card__seal-inner,
+  .publication-scroll-card__seal-inner {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .scroll-card__flutter {
+    display: none;
   }
 }
