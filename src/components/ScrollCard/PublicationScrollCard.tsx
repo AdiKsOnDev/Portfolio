@@ -108,7 +108,6 @@ export function PublicationScrollCard({
         {/* Authors Section */}
         <div className="publication-scroll-card__authors">
           <div className="publication-scroll-card__authors-label">
-            <span className="publication-scroll-card__authors-icon" aria-hidden="true">✒️</span>
             Authors
           </div>
           <div className="publication-scroll-card__authors-text">
@@ -119,7 +118,6 @@ export function PublicationScrollCard({
         {/* Journal/Conference */}
         <div className="publication-scroll-card__journal">
           <div className="publication-scroll-card__journal-label">
-            <span className="publication-scroll-card__journal-icon" aria-hidden="true">📚</span>
             Published in
           </div>
           <div className="publication-scroll-card__journal-text">
@@ -130,7 +128,6 @@ export function PublicationScrollCard({
         {/* Abstract Section */}
         <div className="publication-scroll-card__abstract">
           <h4 className="publication-scroll-card__abstract-label">
-            <span className="publication-scroll-card__abstract-icon" aria-hidden="true">🏺</span>
             Abstract
           </h4>
           <div className="publication-scroll-card__abstract-content">
@@ -143,7 +140,6 @@ export function PublicationScrollCard({
         {/* Academic Metrics - Ancient Greek Style */}
         <div className="publication-scroll-card__metrics">
           <div className="publication-scroll-card__metrics-label">
-            <span className="publication-scroll-card__metrics-icon" aria-hidden="true">⚖️</span>
             Academic Impact
           </div>
           <div className="publication-scroll-card__metrics-grid">
@@ -180,9 +176,6 @@ export function PublicationScrollCard({
             className="publication-scroll-card__action publication-scroll-card__action--primary"
             aria-label={`Read full paper: ${publication.title}`}
           >
-            <span className="publication-scroll-card__action-icon" aria-hidden="true">
-              📜
-            </span>
             <span className="publication-scroll-card__action-text">Download PDF</span>
             <svg
               className="publication-scroll-card__action-download"
@@ -204,9 +197,6 @@ export function PublicationScrollCard({
             className="publication-scroll-card__action publication-scroll-card__action--secondary"
             aria-label={`View ${publication.title} citation`}
           >
-            <span className="publication-scroll-card__action-icon" aria-hidden="true">
-              📖
-            </span>
             <span className="publication-scroll-card__action-text">Citation</span>
           </button>
           
@@ -214,9 +204,6 @@ export function PublicationScrollCard({
             className="publication-scroll-card__action publication-scroll-card__action--secondary"
             aria-label={`View ${publication.title} research data`}
           >
-            <span className="publication-scroll-card__action-icon" aria-hidden="true">
-              🗂️
-            </span>
             <span className="publication-scroll-card__action-text">Research Data</span>
           </button>
         </div>
