@@ -1,16 +1,5 @@
-/**
- * Project data structure for portfolio display
- */
-interface ProjectData {
-  /** Unique project identifier */
-  id: number
-  /** Project display title */
-  title: string
-  /** Brief project description explaining key features or purpose */
-  description: string
-  /** Array of technology tags used in the project */
-  tags: string[]
-}
+"use client"
+import { ProjectScrollCard, ProjectData } from './ScrollCard'
 
 /**
  * WorkSection - Enhanced portfolio projects showcase component
@@ -27,31 +16,31 @@ export function WorkSection() {
   const projects: ProjectData[] = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
+      title: 'Neural Style Transfer Engine',
       description:
-        'A full-stack e-commerce solution with modern payment integration, real-time inventory management, and responsive design for optimal user experience across all devices.',
-      tags: ['React', 'TypeScript', 'Node.js', 'Stripe'],
+        'Advanced deep learning system for artistic style transfer using convolutional neural networks. Implements optimization algorithms for real-time style synthesis with conventional code architecture.',
+      tags: ['PyTorch', 'Computer Vision', 'CNN', 'CUDA'],
     },
     {
       id: 2,
-      title: 'Portfolio Analytics Dashboard',
+      title: 'Automated ML Pipeline',
       description:
-        'Interactive data visualization platform featuring real-time analytics, customizable charts, and comprehensive reporting tools for business intelligence.',
-      tags: ['Vue.js', 'D3.js', 'Python', 'PostgreSQL'],
+        'Production-grade MLOps platform with automated feature engineering, model selection, and deployment. Emphasizes conventional code practices and robust automation workflows.',
+      tags: ['MLOps', 'Kubernetes', 'Python', 'CI/CD'],
     },
     {
       id: 3,
-      title: 'Task Management System',
+      title: 'NLP Research Framework',
       description:
-        'Collaborative project management application with real-time updates, team coordination features, and advanced workflow automation capabilities.',
-      tags: ['Next.js', 'Socket.io', 'MongoDB', 'Redis'],
+        'Research-oriented natural language processing framework for transformer architectures. Built with conventional coding principles and extensive automation for reproducible research.',
+      tags: ['Transformers', 'BERT', 'Hugging Face', 'Research'],
     },
     {
       id: 4,
-      title: 'AI Content Generator',
+      title: 'Reinforcement Learning Agent',
       description:
-        'Machine learning-powered content creation tool with natural language processing, automated optimization, and multi-platform publishing support.',
-      tags: ['Python', 'TensorFlow', 'FastAPI', 'AWS'],
+        'Deep Q-learning implementation for autonomous decision-making systems. Focuses on conventional code structure and automated training pipelines for reliable AI agents.',
+      tags: ['RL', 'DQN', 'OpenAI Gym', 'TensorFlow'],
     },
   ]
 
@@ -74,59 +63,15 @@ export function WorkSection() {
           Work & Projects
         </h2>
 
-        <ul className="grid md:grid-cols-2 gap-8 list-none">
-          {projects.map(project => (
-            <li key={project.id}>
-              <article
-                className="border border-foreground/20 rounded-lg p-6 hover:border-accent/50 transition-all duration-300 hover:transform hover:scale-105"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  backdropFilter: 'blur(10px)',
-                }}
-              >
-                <h3
-                  className="text-accent font-semibold mb-3"
-                  style={{
-                    fontSize: 'clamp(1.125rem, 3vw, 1.25rem)',
-                    lineHeight: '1.3',
-                  }}
-                >
-                  {project.title}
-                </h3>
-
-                <p
-                  className="text-foreground mb-4"
-                  style={{
-                    fontSize: 'clamp(0.9rem, 2vw, 1rem)',
-                    lineHeight: '1.6',
-                  }}
-                >
-                  {project.description}
-                </p>
-
-                <ul
-                  className="flex flex-wrap gap-2 list-none"
-                  aria-label={`Technologies used in ${project.title}`}
-                >
-                  {project.tags.map(tag => (
-                    <li key={tag}>
-                      <span
-                        className="px-3 py-1 text-accent rounded-full"
-                        style={{
-                          backgroundColor: 'rgba(19, 19, 19, 0.1)',
-                          fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
-                          fontWeight: '500',
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            </li>
+        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {projects.map((project, index) => (
+            <ProjectScrollCard
+              key={project.id}
+              project={project}
+              index={index}
+            />
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   )
