@@ -53,7 +53,7 @@ export function HeroSection() {
             letterSpacing: '-0.02em',
           }}
         >
-          Adil Afzal
+          Adil Alizada
         </h1>
 
         <p
@@ -64,7 +64,7 @@ export function HeroSection() {
             fontWeight: '400',
           }}
         >
-          Software Engineer & Creative Problem Solver
+          AI/ML Engineer & Researcher
         </p>
 
         <p
@@ -75,7 +75,7 @@ export function HeroSection() {
             opacity: '0.8',
           }}
         >
-          Building digital experiences with modern technologies and thoughtful design
+          Passionate about conventional code, automation, and advancing the frontiers of artificial intelligence
         </p>
       </div>
 
