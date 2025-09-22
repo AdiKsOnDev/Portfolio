@@ -20,7 +20,7 @@ The color scheme draws inspiration from ancient Greek marble and parchment:
 
 - **Background** (`#EEE4E3`): Warm marble white evoking ancient parchment textures
 - **Accent** (`#131313`): Deep charcoal black ensuring high contrast (4.5:1 ratio) for accessibility
-- **Foreground** (`#BBB8B3`): Muted brown for secondary text and subtle elements
+- **Foreground** (`#BBB8B3`): Muted gray for secondary text and subtle elements
 
 ### Typography
 
