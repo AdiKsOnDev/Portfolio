@@ -55,10 +55,10 @@ export function ProjectScrollCard({
       role="article"
       ariaLabelledby={`project-title-${project.id}`}
     >
-      {/* Project Number - Ancient Greek Numeral Style */}
+      {/* Project Number - Greek Letter Style */}
       <div className="project-scroll-card__number" aria-hidden="true">
         <div className="project-scroll-card__number-inner">
-          {String(project.id).padStart(2, '0')}
+          {getGreekLetter(project.id)}
         </div>
       </div>
 
@@ -113,48 +113,16 @@ export function ProjectScrollCard({
           </ul>
         </div>
 
-        {/* Action Buttons - Ancient Greek Symbol Style */}
-        <div className="project-scroll-card__actions">
-          <button
-            className="project-scroll-card__action project-scroll-card__action--primary"
-            aria-label={`View ${project.title} project details`}
-          >
-            <span className="project-scroll-card__action-icon" aria-hidden="true"></span>
-            <span className="project-scroll-card__action-text">View Project</span>
-            <svg
-              className="project-scroll-card__action-arrow"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </button>
-
-          <button
-            className="project-scroll-card__action project-scroll-card__action--secondary"
-            aria-label={`View ${project.title} source code`}
-          >
-            <span className="project-scroll-card__action-icon" aria-hidden="true"></span>
-            <span className="project-scroll-card__action-text">Source Code</span>
-          </button>
-        </div>
       </div>
 
-      {/* Wax Seal Decoration */}
-      <div className="project-scroll-card__seal" aria-hidden="true">
-        <div className="project-scroll-card__seal-inner">
-          {/* Omega (Ω) symbol represents "the end" or completion in Greek, symbolizing finished projects */}
-          {/* Ancient Greek letter chosen to emphasize project completion and mastery */}
-          <span className="project-scroll-card__seal-symbol">Ω</span>
-        </div>
-      </div>
     </ScrollCard>
   )
+}
+
+/**
+ * Convert a number to Greek letter (cycling through uppercase Greek alphabet)
+ */
+function getGreekLetter(num: number): string {
+  const greekLetters = ['Ω', 'Λ', 'Σ', 'Δ', 'Π', 'Φ', 'Ψ', 'Θ', 'Ξ', 'Υ', 'Μ', 'Ν', 'Β', 'Γ', 'Ζ', 'Η', 'Κ', 'Ρ', 'Τ', 'Χ']
+  return greekLetters[(num - 1) % greekLetters.length] || 'Ω'
 }
