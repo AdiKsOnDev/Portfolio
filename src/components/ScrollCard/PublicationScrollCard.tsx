@@ -79,9 +79,9 @@ export function PublicationScrollCard({
     >
       {/* Manuscript Header */}
       <div className="publication-scroll-card__header">
-        {/* Publication Number in Roman Style */}
+        {/* Publication Number in Greek Letter Style */}
         <div className="publication-scroll-card__number" aria-hidden="true">
-          <div className="publication-scroll-card__number-inner">{toRomanNumeral(index + 1)}</div>
+          <div className="publication-scroll-card__number-inner">{getGreekLetter((index || 0) + 1)}</div>
         </div>
 
         {/* Year Badge */}
@@ -140,78 +140,16 @@ export function PublicationScrollCard({
           </div>
         </div>
 
-        {/* Action Buttons - Scholarly Style */}
-        <div className="publication-scroll-card__actions">
-          <button
-            className="publication-scroll-card__action publication-scroll-card__action--primary"
-            aria-label={`Read full paper: ${publication.title}`}
-          >
-            <span className="publication-scroll-card__action-text">Download PDF</span>
-            <svg
-              className="publication-scroll-card__action-download"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-          </button>
-
-          <button
-            className="publication-scroll-card__action publication-scroll-card__action--secondary"
-            aria-label={`View ${publication.title} citation`}
-          >
-            <span className="publication-scroll-card__action-text">Citation</span>
-          </button>
-
-          <button
-            className="publication-scroll-card__action publication-scroll-card__action--secondary"
-            aria-label={`View ${publication.title} research data`}
-          >
-            <span className="publication-scroll-card__action-text">Research Data</span>
-          </button>
-        </div>
       </div>
 
-      {/* Academic Seal */}
-      <div className="publication-scroll-card__seal" aria-hidden="true">
-        <div className="publication-scroll-card__seal-inner">
-          {/* Phi (Φ) represents the golden ratio and academic excellence in Greek mathematical tradition */}
-          {/* Symbol of scholarly pursuit and mathematical perfection in ancient Greek philosophy */}
-          <span className="publication-scroll-card__seal-symbol">Φ</span>
-        </div>
-      </div>
     </ScrollCard>
   )
 }
 
 /**
- * Convert a number to Roman numerals (up to 20 for practical use)
+ * Convert a number to Greek letter (cycling through uppercase Greek alphabet)
  */
-function toRomanNumeral(num: number): string {
-  const romanNumerals = [
-    { value: 10, symbol: 'X' },
-    { value: 9, symbol: 'IX' },
-    { value: 5, symbol: 'V' },
-    { value: 4, symbol: 'IV' },
-    { value: 1, symbol: 'I' },
-  ]
-
-  let result = ''
-  let remaining = num
-
-  for (const { value, symbol } of romanNumerals) {
-    while (remaining >= value) {
-      result += symbol
-      remaining -= value
-    }
-  }
-
-  return result || 'I'
+function getGreekLetter(num: number): string {
+  const greekLetters = ['Ω', 'Λ', 'Σ', 'Δ', 'Π', 'Φ', 'Ψ', 'Θ', 'Ξ', 'Υ', 'Μ', 'Ν', 'Β', 'Γ', 'Ζ', 'Η', 'Κ', 'Ρ', 'Τ', 'Χ']
+  return greekLetters[(num - 1) % greekLetters.length] || 'Ω'
 }
