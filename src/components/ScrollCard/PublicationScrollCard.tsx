@@ -2,6 +2,14 @@ import React, { useMemo } from 'react'
 import { ScrollCard } from './ScrollCard'
 
 /**
+ * Convert a number to Greek letter (cycling through uppercase Greek alphabet)
+ */
+function getGreekLetter(num: number): string {
+  const greekLetters = ['Ω', 'Λ', 'Σ', 'Δ', 'Π', 'Φ', 'Ψ', 'Θ', 'Ξ', 'Υ', 'Μ', 'Ν', 'Β', 'Γ', 'Ζ', 'Η', 'Κ', 'Ρ', 'Τ', 'Χ']
+  return greekLetters[(num - 1) % greekLetters.length] || 'Ω'
+}
+
+/**
  * Publication data structure for scroll card display
  */
 export interface PublicationData {
@@ -144,12 +152,4 @@ export function PublicationScrollCard({
 
     </ScrollCard>
   )
-}
-
-/**
- * Convert a number to Greek letter (cycling through uppercase Greek alphabet)
- */
-function getGreekLetter(num: number): string {
-  const greekLetters = ['Ω', 'Λ', 'Σ', 'Δ', 'Π', 'Φ', 'Ψ', 'Θ', 'Ξ', 'Υ', 'Μ', 'Ν', 'Β', 'Γ', 'Ζ', 'Η', 'Κ', 'Ρ', 'Τ', 'Χ']
-  return greekLetters[(num - 1) % greekLetters.length] || 'Ω'
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { ScrollCard } from './ScrollCard'
+import { getGreekLetter } from '../../utils/greekLetters'
 
 /**
  * Project data structure for scroll card display
@@ -117,12 +118,4 @@ export function ProjectScrollCard({
 
     </ScrollCard>
   )
-}
-
-/**
- * Convert a number to Greek letter (cycling through uppercase Greek alphabet)
- */
-function getGreekLetter(num: number): string {
-  const greekLetters = ['Ω', 'Λ', 'Σ', 'Δ', 'Π', 'Φ', 'Ψ', 'Θ', 'Ξ', 'Υ', 'Μ', 'Ν', 'Β', 'Γ', 'Ζ', 'Η', 'Κ', 'Ρ', 'Τ', 'Χ']
-  return greekLetters[(num - 1) % greekLetters.length] || 'Ω'
 }
