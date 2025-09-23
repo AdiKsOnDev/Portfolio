@@ -346,6 +346,7 @@ export function ParallaxBackground() {
    * Calculate letter transform based on scroll position and layer speed
    * Special handling for cluster symbols with their own parallax speed
    * Mobile-optimized with reduced movement complexity
+   * Adds scroll-based rotation for parallax symbols only (not cluster symbols)
    */
   const getLetterTransform = (letter: GreekLetter): string => {
     if (prefersReducedMotion) {
@@ -364,7 +365,17 @@ export function ParallaxBackground() {
     const scrollMultiplier = isMobile ? 0.5 : 1
     const translateY = letter.y - scrollY * layerSpeed * scrollMultiplier
 
-    return `translate(${letter.x}vw, ${translateY}px) rotate(${letter.rotation}deg)`
+    // Add scroll-based rotation only for parallax symbols (not cluster symbols)
+    let rotationAngle = letter.rotation
+    if (!letter.isCluster) {
+      // Rotate based on scroll position, with different rates per layer for visual variety
+      const rotationMultiplier = isMobile ? 0.02 : 0.03 // Subtle rotation
+      const layerRotationRate = (letter.layer + 1) * 0.5 // Different rates per layer
+      const scrollRotation = (scrollY * rotationMultiplier * layerRotationRate) % 360
+      rotationAngle = letter.rotation + scrollRotation
+    }
+
+    return `translate(${letter.x}vw, ${translateY}px) rotate(${rotationAngle}deg)`
   }
 
   if (prefersReducedMotion) {
