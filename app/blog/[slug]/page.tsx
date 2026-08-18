@@ -1,6 +1,4 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/data";
 import { getPostBySlug } from "@/lib/data/blog-content.server";
@@ -42,45 +40,34 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const headings: Heading[] = extractHeadings(post.content || "");
 
   return (
-    <article className="max-w-6xl mx-auto px-6 pt-24 pb-16">
-      <Link
-        href="/blog"
-        className="inline-flex items-center gap-2 text-secondary hover:text-foreground transition-colors mb-12"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        <span className="text-sm">Back to Blog</span>
-      </Link>
+    <article className="mx-auto max-w-6xl px-6 pb-16 pt-16 lg:pt-18">
+      <header className="mb-32 text-center">
+        <h1 className="mx-auto max-w-4xl font-serif text-5xl leading-tight text-foreground sm:text-6xl lg:text-7xl">
+          {post.title}
+        </h1>
+        <p className="mx-auto mt-6 max-w-3xl font-serif text-lg italic text-secondary">
+          {post.excerpt}
+        </p>
+      </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <aside className="lg:col-span-2 hidden lg:block">
-          <div className="sticky top-24">
+      {post.coverImage && (
+        <div className="mx-auto mb-16 aspect-video w-full max-w-5xl overflow-hidden border border-muted-border bg-muted">
+          <img
+            src={post.coverImage}
+            alt={post.title}
+            className="h-full w-full object-cover"
+          />
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,7fr)_minmax(0,2fr)]">
+        <aside className="hidden lg:block">
+          <div className="sticky top-24 mx-auto w-fit max-w-full">
             <TableOfContents headings={headings} />
           </div>
         </aside>
 
-        <div className="lg:col-span-7">
-          <header className="mb-12 text-center lg:text-left">
-            <span className="text-xs uppercase tracking-wider text-accent mb-4 block">
-              {post.category}
-            </span>
-            <h1 className="font-serif text-4xl lg:text-5xl text-foreground mb-6">
-              {post.title}
-            </h1>
-            <p className="font-serif italic text-secondary text-lg">
-              {post.excerpt}
-            </p>
-          </header>
-
-          {post.coverImage && (
-            <div className="aspect-video bg-muted border border-muted-border mb-12 overflow-hidden">
-              <img
-                src={post.coverImage}
-                alt={post.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
-
+        <div>
           <BlogMarkdown content={post.content || ""} />
 
           <div className="flex flex-wrap gap-2 mt-12 pt-8 border-t border-muted-border">
@@ -95,8 +82,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </div>
 
-        <aside className="lg:col-span-3 hidden lg:block">
-          <div className="sticky top-24 space-y-6">
+        <aside className="hidden lg:block">
+          <div className="sticky top-24 mx-auto w-fit max-w-full space-y-6">
             <PostMetadata post={post} />
           </div>
         </aside>
