@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
@@ -14,12 +15,21 @@ export default function NotFound() {
   return (
     <section className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl items-center px-6 py-24">
       <div className="w-full border-y border-muted-border py-16 text-center sm:py-20">
-        <p
-          aria-hidden="true"
-          className="font-serif text-[clamp(7rem,22vw,16rem)] font-bold leading-[0.75] tracking-[-0.08em] text-foreground"
+        <div
+          aria-label="Error 404"
+          className="flex items-center justify-center font-serif text-[clamp(7rem,22vw,16rem)] font-bold leading-[0.75] text-foreground"
         >
-          404
-        </p>
+          <span aria-hidden="true">4</span>
+          <Image
+            src="/logo.png"
+            alt=""
+            width={641}
+            height={565}
+            aria-hidden="true"
+            className="mx-[0.03em] h-[0.68em] w-auto"
+          />
+          <span aria-hidden="true">4</span>
+        </div>
 
         <div className="relative mx-auto mt-12 max-w-2xl">
           <p className="mb-5 text-xs uppercase tracking-[0.2em] text-accent">
