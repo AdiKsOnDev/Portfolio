@@ -8,8 +8,8 @@ export function Footer() {
   return (
     <footer className="mt-auto border-t border-muted-border">
       <div className="max-w-6xl mx-auto px-6 py-8">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-6">
+        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:justify-start">
             <a
               href={profile.social.github}
               target="_blank"
@@ -34,7 +34,7 @@ export function Footer() {
             </Link>
           </div>
 
-          <span className="text-xs uppercase tracking-wider text-secondary">
+          <span className="text-center text-xs uppercase tracking-wider text-secondary sm:text-right">
             © {currentYear} {profile.name}
           </span>
         </div>
