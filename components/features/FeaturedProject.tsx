@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { FadeIn } from "@/components/ui";
+import { getProjectSlug } from "@/lib/data";
 import type { Project } from "@/types";
 
 interface FeaturedProjectProps {
@@ -37,7 +38,14 @@ export function FeaturedProject({ project }: FeaturedProjectProps) {
             <p className="text-secondary text-sm mb-6">
               {project.description}
             </p>
-            <div className="flex gap-6 justify-center md:justify-start">
+            <div className="flex flex-wrap justify-center gap-6 md:justify-start">
+              <Link
+                href={`/projects/${getProjectSlug(project)}`}
+                className="inline-flex items-center gap-2 text-sm text-accent transition-all duration-300 hover:underline"
+              >
+                Project Details
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
               {project.links.github && (
                 <a
                   href={project.links.github}

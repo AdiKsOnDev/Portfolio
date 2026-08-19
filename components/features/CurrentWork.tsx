@@ -1,7 +1,8 @@
 "use client";
 
-import { getFeaturedProject } from "@/lib/data";
-import { Github, ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { getFeaturedProject, getProjectSlug } from "@/lib/data";
+import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
 import { FadeIn } from "@/components/ui";
 
 export function CurrentWork() {
@@ -28,12 +29,19 @@ export function CurrentWork() {
                 {project.longDescription}
               </p>
               <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                <Link
+                  href={`/projects/${getProjectSlug(project)}`}
+                  className="inline-flex items-center gap-2 bg-accent px-6 py-3 text-sm uppercase tracking-wider text-accent-foreground transition-all duration-300 hover:scale-[1.02] hover:opacity-90"
+                >
+                  View Project
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
                 {project.links.github && (
                   <a
                     href={project.links.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-6 py-3 text-sm uppercase tracking-wider hover:opacity-90 transition-all duration-300 hover:scale-[1.02]"
+                    className="inline-flex items-center gap-2 border border-foreground px-6 py-3 text-sm uppercase tracking-wider text-foreground transition-colors duration-300 hover:bg-foreground hover:text-background"
                   >
                     <Github className="w-4 h-4" />
                     View Repository
