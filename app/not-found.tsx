@@ -17,7 +17,7 @@ export default function NotFound() {
       <div className="w-full border-y border-muted-border py-16 text-center sm:py-20">
         <div
           aria-label="Error 404"
-          className="flex items-center justify-center font-serif text-[clamp(7rem,22vw,16rem)] font-bold leading-[0.75] text-foreground"
+          className="flex items-center justify-center [font-family:var(--font-monocraft)] text-[clamp(7rem,22vw,16rem)] font-bold leading-[0.75] text-foreground"
         >
           <span aria-hidden="true">4</span>
           <Image
