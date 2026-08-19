@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import { Header, Footer } from "@/components/layouts";
 import { ThemeProvider, NotificationProvider } from "@/components/ui";
 import "./globals.css";
@@ -10,6 +11,57 @@ const montserrat = Montserrat({
   style: ["normal", "italic"],
   variable: "--font-montserrat",
   display: "swap",
+});
+
+const monocraft = localFont({
+  src: [
+    {
+      path: "../public/fonts/sans/Monocraft/Monocraft.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/sans/Monocraft/weights/Monocraft-SemiBold.otf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/sans/Monocraft/weights/Monocraft-Bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-monocraft",
+  display: "swap",
+  fallback: ["ui-monospace", "monospace"],
+});
+
+const tiempos = localFont({
+  src: [
+    {
+      path: "../public/fonts/serif/Tiempos/TestTiemposText-Regular-BF66457a50cd521.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/serif/Tiempos/TestTiemposText-RegularItalic-BF66457a50421c2.otf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/serif/Tiempos/TestTiemposText-Semibold-BF66457a4fed201.otf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/serif/Tiempos/TestTiemposText-Bold-BF66457a4f03c40.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-tiempos",
+  display: "swap",
+  fallback: ["Georgia", "serif"],
 });
 
 const themeInitializationScript = `
@@ -45,7 +97,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={montserrat.variable} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${montserrat.variable} ${monocraft.variable} ${tiempos.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitializationScript }} />
       </head>
