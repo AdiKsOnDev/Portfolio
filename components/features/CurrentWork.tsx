@@ -31,10 +31,10 @@ export function CurrentWork() {
               <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                 <Link
                   href={`/projects/${getProjectSlug(project)}`}
-                  className="inline-flex items-center gap-2 bg-accent px-6 py-3 text-sm uppercase tracking-wider text-accent-foreground transition-all duration-300 hover:scale-[1.02] hover:opacity-90"
+                  className="inline-flex items-center gap-2 bg-accent px-4 py-2 text-xs uppercase tracking-wider text-accent-foreground transition-all duration-300 hover:scale-[1.02] hover:opacity-90"
                 >
                   View Project
-                  <ArrowUpRight className="h-4 w-4" />
+                  <ArrowUpRight className="h-3.5 w-3.5" />
                 </Link>
                 {project.links.github && (
                   <a
