@@ -4,7 +4,11 @@ import { getAllPosts } from "@/lib/data";
 import { getPostBySlug } from "@/lib/data/blog-content.server";
 import { extractHeadings, type Heading } from "@/lib/utils";
 import { ContinueReading } from "@/components/features";
-import { PostMetadata, TableOfContents } from "@/components/features/PostSidebar";
+import {
+  MobileTableOfContents,
+  PostMetadata,
+  TableOfContents,
+} from "@/components/features/PostSidebar";
 import { BlogMarkdown } from "@/components/blog/BlogMarkdown";
 
 interface BlogPostPageProps {
@@ -48,6 +52,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <p className="mx-auto mt-6 max-w-3xl font-serif text-lg italic text-secondary">
           {post.excerpt}
         </p>
+        <div className="mt-8 lg:hidden">
+          <PostMetadata post={post} compact />
+        </div>
       </header>
 
       {post.coverImage && (
@@ -59,6 +66,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           />
         </div>
       )}
+
+      <div className="mb-10 lg:hidden">
+        <MobileTableOfContents headings={headings} />
+      </div>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,7fr)_minmax(0,2fr)]">
         <aside className="hidden lg:block">

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
 import type { BlogPost } from "@/types";
-import type { Heading } from "@/lib/utils";
+import { formatDate, type Heading } from "@/lib/utils";
 
 interface TableOfContentsProps {
   headings: Heading[];
@@ -68,23 +69,49 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
   );
 }
 
-interface PostMetadataProps {
-  post: BlogPost;
+export function MobileTableOfContents({ headings }: TableOfContentsProps) {
+  if (headings.length === 0) return null;
+
+  return (
+    <details className="group border-y border-muted-border">
+      <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-xs uppercase tracking-wider text-secondary">
+        On This Page
+        <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
+      </summary>
+      <nav aria-label="Table of contents" className="pb-4">
+        <ul className="space-y-1 border-l border-muted-border">
+          {headings.map((heading) => (
+            <li key={heading.id}>
+              <a
+                href={`#${heading.id}`}
+                className={`block py-1.5 text-sm leading-snug text-secondary transition-colors hover:text-foreground ${
+                  heading.level === 3 ? "pl-7" : "pl-4"
+                }`}
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </details>
+  );
 }
 
-export function PostMetadata({ post }: PostMetadataProps) {
+interface PostMetadataProps {
+  post: BlogPost;
+  compact?: boolean;
+}
+
+export function PostMetadata({ post, compact = false }: PostMetadataProps) {
   return (
-    <div className="space-y-6">
+    <div className={compact ? "grid grid-cols-3 gap-4 text-center" : "space-y-6"}>
       <div>
         <span className="text-xs uppercase tracking-wider text-secondary block mb-1">
           Published
         </span>
         <span className="font-serif text-sm text-foreground">
-          {new Date(post.publishedAt).toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          })}
+          {formatDate(post.publishedAt)}
         </span>
       </div>
       <div>
