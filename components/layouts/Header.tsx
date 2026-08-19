@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Github, Menu, X, Wrench } from "lucide-react";
 import { ThemeToggle } from "@/components/ui";
 import { getProfile } from "@/lib/data";
@@ -17,6 +17,8 @@ const navLinks = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
   const pathname = usePathname();
   const profile = getProfile();
 
@@ -26,6 +28,21 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    firstMobileLinkRef.current?.focus();
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setMobileMenuOpen(false);
+      menuButtonRef.current?.focus();
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [mobileMenuOpen]);
 
   return (
     <header
@@ -54,6 +71,7 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  aria-current={isActive ? "page" : undefined}
                   className={`text-sm font-sans font-semibold transition-colors relative ${
                     isActive
                       ? "text-accent after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-[2px] after:bg-accent"
@@ -92,9 +110,12 @@ export function Header() {
 
         {/* Mobile menu button */}
         <button
+          ref={menuButtonRef}
           className="md:hidden p-2 text-secondary hover:text-foreground transition-colors"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation"
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -102,19 +123,26 @@ export function Header() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-background border-t border-muted-border">
+        <div
+          id="mobile-navigation"
+          className="border-t border-muted-border bg-background md:hidden"
+        >
           <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4">
-            {navLinks.map((link) => {
+            {navLinks.map((link, index) => {
               const isActive =
                 pathname === link.href ||
                 (link.href !== "/" && pathname.startsWith(link.href));
               return (
                 <Link
                   key={link.href}
+                  ref={index === 0 ? firstMobileLinkRef : undefined}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`text-sm font-sans font-semibold transition-colors ${
-                    isActive ? "text-accent" : "text-secondary hover:text-foreground"
+                  aria-current={isActive ? "page" : undefined}
+                  className={`border-l-2 pl-3 text-sm font-sans font-semibold transition-colors ${
+                    isActive
+                      ? "border-accent text-accent"
+                      : "border-transparent text-secondary hover:border-muted-border hover:text-foreground"
                   }`}
                 >
                   {link.label}
