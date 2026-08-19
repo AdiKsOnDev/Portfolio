@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { getFeaturedProject, getProjectSlug } from "@/lib/data";
 import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
@@ -74,13 +75,15 @@ export function CurrentWork() {
           </FadeIn>
 
           <FadeIn delay={200}>
-            <div className="bg-card border border-muted-border overflow-hidden transition-all duration-300">
+            <div className="relative overflow-hidden border border-muted-border bg-card transition-all duration-300">
               {project.image ? (
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
-                  loading="lazy"
-                  className="w-full aspect-video object-cover"
+                  width={800}
+                  height={450}
+                  sizes="(max-width: 1024px) calc(100vw - 3rem), 50vw"
+                  className="aspect-video w-full object-cover"
                 />
               ) : (
                 <div className="aspect-video flex items-center justify-center bg-muted">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { BlogPost } from "@/types";
@@ -47,13 +48,14 @@ export function ContinueReading({ posts, currentSlug }: ContinueReadingProps) {
         href={`/blog/${pick.slug}`}
         className="group grid grid-cols-1 gap-6 sm:grid-cols-[300px_1fr] sm:items-center"
       >
-        <div className="aspect-video overflow-hidden border border-muted-border bg-muted">
+        <div className="relative aspect-video overflow-hidden border border-muted-border bg-muted">
           {pick.coverImage ? (
-            <img
+            <Image
               src={pick.coverImage}
               alt={pick.title}
-              loading="lazy"
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              fill
+              sizes="(max-width: 640px) calc(100vw - 3rem), 300px"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center">

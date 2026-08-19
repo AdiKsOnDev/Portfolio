@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { getCompletedProjects, getProjectSlug } from "@/lib/data";
@@ -59,12 +60,13 @@ function FeaturedProjectCard({ project, delay }: { project: Project; delay: numb
           </span>
         </div>
         {project.image ? (
-          <div className="w-full lg:w-80 aspect-video overflow-hidden flex-shrink-0 border border-muted-border">
-            <img
+          <div className="relative aspect-video w-full flex-shrink-0 overflow-hidden border border-muted-border lg:w-80">
+            <Image
               src={project.image}
               alt={project.title}
-              loading="lazy"
-              className="w-full h-full object-cover"
+              fill
+              sizes="(max-width: 1024px) calc(100vw - 7rem), 320px"
+              className="object-cover"
             />
           </div>
         ) : (

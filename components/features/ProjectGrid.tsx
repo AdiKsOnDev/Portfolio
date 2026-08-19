@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { getCompletedProjects, getProjectSlug } from "@/lib/data";
@@ -13,13 +14,14 @@ function ProjectCard({ project, delay }: { project: Project; delay: number }) {
         href={`/projects/${getProjectSlug(project)}`}
         className="group flex h-full flex-col overflow-hidden border border-muted-border bg-card transition-all duration-300 hover:border-accent/50"
       >
-        <div className="aspect-video overflow-hidden border-b border-muted-border bg-muted">
+        <div className="relative aspect-video overflow-hidden border-b border-muted-border bg-muted">
           {project.image ? (
-            <img
+            <Image
               src={project.image}
               alt={project.title}
-              loading="lazy"
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              fill
+              sizes="(max-width: 768px) calc(100vw - 3rem), (max-width: 1024px) 50vw, 33vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center">

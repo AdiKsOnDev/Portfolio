@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { getProfile } from "@/lib/data";
@@ -327,11 +328,12 @@ export function MotionHero() {
         </div>
 
         <div className="hidden justify-end lg:flex">
-          <img
+          <Image
             src="/logo.png"
             alt="Adil Alizada Logo"
-            width={420}
-            height={420}
+            width={641}
+            height={565}
+            sizes="360px"
             className="h-auto w-full max-w-[360px] animate-[fadeIn_0.8s_ease-out]"
           />
         </div>

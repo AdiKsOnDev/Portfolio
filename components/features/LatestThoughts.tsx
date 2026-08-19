@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { getLatestPostsSync } from "@/lib/data";
 import { formatDate } from "@/lib/utils";
@@ -47,13 +48,14 @@ export function LatestThoughts() {
           </FadeIn>
 
           <FadeIn delay={200}>
-            <div className="hidden lg:block bg-card border border-muted-border overflow-hidden aspect-[4/3] transition-all duration-300">
+            <div className="relative hidden aspect-[4/3] overflow-hidden border border-muted-border bg-card transition-all duration-300 lg:block">
               {activePost?.coverImage ? (
-                <img
+                <Image
                   src={activePost.coverImage}
                   alt={activePost.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="50vw"
+                  className="object-cover"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">

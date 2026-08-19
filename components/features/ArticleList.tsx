@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { formatDate } from "@/lib/utils";
@@ -27,12 +28,13 @@ export function ArticleList({ posts }: ArticleListProps) {
               className="group flex flex-col h-full bg-card border border-muted-border overflow-hidden hover:border-accent/50 transition-all duration-300"
             >
               {post.coverImage ? (
-                <div className="aspect-video overflow-hidden">
-                  <img
+                <div className="relative aspect-video overflow-hidden">
+                  <Image
                     src={post.coverImage}
                     alt={post.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 640px) calc(100vw - 3rem), (max-width: 1280px) 50vw, 544px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
               ) : (

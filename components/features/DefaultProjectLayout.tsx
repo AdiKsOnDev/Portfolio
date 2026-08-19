@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Github, ExternalLink, BookOpen } from "lucide-react";
 import type { Project } from "@/types";
@@ -19,12 +20,14 @@ export function DefaultProjectLayout({ project }: DefaultProjectLayoutProps) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2 text-center md:text-left">
-          <div className="aspect-video bg-muted border border-muted-border mb-8 flex items-center justify-center overflow-hidden">
+          <div className="relative mb-8 flex aspect-video items-center justify-center overflow-hidden border border-muted-border bg-muted">
             {project.image ? (
-              <img
+              <Image
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 1024px) calc(100vw - 3rem), 67vw"
+                className="object-cover"
               />
             ) : (
               <span className="text-secondary text-sm uppercase">Preview</span>

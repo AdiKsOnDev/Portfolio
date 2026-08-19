@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/data";
 import { getPostBySlug } from "@/lib/data/blog-content.server";
@@ -58,11 +59,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </header>
 
       {post.coverImage && (
-        <div className="mx-auto mb-16 aspect-video w-full max-w-5xl overflow-hidden border border-muted-border bg-muted">
-          <img
+        <div className="relative mx-auto mb-10 aspect-video w-full max-w-5xl overflow-hidden border border-muted-border bg-muted lg:mb-16">
+          <Image
             src={post.coverImage}
             alt={post.title}
-            className="h-full w-full object-cover"
+            fill
+            sizes="(max-width: 1080px) calc(100vw - 3rem), 1024px"
+            className="object-cover"
           />
         </div>
       )}

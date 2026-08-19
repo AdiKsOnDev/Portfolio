@@ -123,6 +123,8 @@ export function BlogMarkdown({ content }: { content: string }) {
             <img
               src={typeof src === "string" ? src : ""}
               alt={alt ?? ""}
+              loading="lazy"
+              decoding="async"
               className="my-6 w-full rounded border border-muted-border"
             />
           ),

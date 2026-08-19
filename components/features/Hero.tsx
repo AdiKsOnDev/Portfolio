@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { getProfile } from "@/lib/data";
 import { FadeIn } from "@/components/ui";
 
@@ -10,11 +11,12 @@ export function Hero() {
     <section className="max-w-6xl mx-auto px-6 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
       <FadeIn delay={150} className="order-first lg:order-last">
         <div className="flex justify-center">
-          <img
+          <Image
             src="/logo.png"
             alt="Adil Alizada Logo"
-            width={320}
-            height={320}
+            width={641}
+            height={565}
+            sizes="(max-width: 640px) 176px, (max-width: 1024px) 224px, 420px"
             className="w-44 sm:w-56 lg:w-2/3 max-w-[420px] h-auto"
           />
         </div>

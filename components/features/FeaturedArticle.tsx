@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { FadeIn } from "@/components/ui";
@@ -23,12 +24,14 @@ export function FeaturedArticle({ post }: FeaturedArticleProps) {
           href={`/blog/${post.slug}`}
           className="group grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-14"
         >
-          <div className="aspect-video overflow-hidden border border-muted-border bg-muted">
+          <div className="relative aspect-video overflow-hidden border border-muted-border bg-muted">
             {post.coverImage ? (
-              <img
+              <Image
                 src={post.coverImage}
                 alt={post.title}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                fill
+                sizes="(max-width: 1024px) calc(100vw - 3rem), 50vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center">

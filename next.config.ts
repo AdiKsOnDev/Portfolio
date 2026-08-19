@@ -17,6 +17,14 @@ const config = (phase: string): NextConfig => {
 
   return {
     ...(isDev ? {} : { output: "export" }),
+    images: {
+      unoptimized: true,
+      remotePatterns: [
+        { protocol: "https", hostname: "i.ibb.co" },
+        { protocol: "https", hostname: "images.unsplash.com" },
+        { protocol: "https", hostname: "github.com" },
+      ],
+    },
     pageExtensions: isDev
       ? ["dev.tsx", "dev.ts", "tsx", "ts", "jsx", "js"]
       : ["tsx", "ts", "jsx", "js"],

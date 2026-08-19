@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { FadeIn } from "@/components/ui";
@@ -16,12 +17,14 @@ export function FeaturedProject({ project }: FeaturedProjectProps) {
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           <FadeIn delay={0} className="lg:col-span-3 text-center md:text-left">
-            <div className="aspect-video bg-foreground/5 border border-muted-border mb-6 flex items-center justify-center overflow-hidden transition-all duration-300 hover:border-accent/50">
+            <div className="relative mb-6 flex aspect-video items-center justify-center overflow-hidden border border-muted-border bg-foreground/5 transition-all duration-300 hover:border-accent/50">
               {project.image ? (
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) calc(100vw - 3rem), 60vw"
+                  className="object-cover"
                 />
               ) : (
                 <span className="text-secondary text-xs uppercase">Preview</span>
