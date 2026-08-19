@@ -40,9 +40,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const headings: Heading[] = extractHeadings(post.content || "");
 
   return (
-    <article className="mx-auto max-w-6xl px-6 pb-16 pt-16 lg:pt-18">
-      <header className="mb-32 text-center">
-        <h1 className="mx-auto max-w-4xl font-serif text-5xl leading-tight text-foreground sm:text-6xl lg:text-7xl">
+    <article className="mx-auto max-w-7xl px-6 pb-16 pt-16">
+      <header className="mb-20 text-center lg:mb-32">
+        <h1 className="mx-auto max-w-5xl font-serif text-5xl leading-tight text-foreground sm:text-6xl lg:text-7xl">
           {post.title}
         </h1>
         <p className="mx-auto mt-6 max-w-3xl font-serif text-lg italic text-secondary">
