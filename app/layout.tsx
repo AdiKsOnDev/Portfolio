@@ -12,6 +12,16 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
+const themeInitializationScript = `
+  try {
+    const storedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = storedTheme === "dark" || (!storedTheme && prefersDark);
+    document.documentElement.classList.toggle("dark", isDark);
+    document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+  } catch {}
+`;
+
 export const metadata: Metadata = {
   title: "Adil | Backend Engineer",
   description:
@@ -35,7 +45,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={montserrat.variable}>
+    <html lang="en" className={montserrat.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitializationScript }} />
+      </head>
       <body className="min-h-screen flex flex-col antialiased">
         <ThemeProvider>
           <NotificationProvider>
